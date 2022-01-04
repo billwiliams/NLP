@@ -35,25 +35,28 @@ def process_tweet(tweet):
     # remove hashtags from the tweet
     tweet2= re.sub(r'#','', tweet2)
 
-    # Tokenize the string and lowercase it
-    tokenizer = TweetTokenizer(preserve_case=False, strip_handles=True,
-                               reduce_len=True)
-    
-    tweet_tokens=tokenizer.tokenize(tweet2)
+    tweet_tokens = tokenize(tweet2)
 
     # Remove stopwords
 
     #Import the english stop words list from NLTK
     stopwords_english = stopwords.words('english') 
 
-    tweet_clean=[]# clean tweet i.e. without stopwords
+    # Remove stopwords
+    tweet_clean = remove_stopwords(tweet_tokens, stopwords_english)
 
-    for word in tweet_tokens:
-        if word not in stopwords_english and word not in string.punctuation:
-            tweet_clean.append(word)
+    # perform stemming
 
+    tweet_stemmed = stem(tweet_clean)
+    
     
 
+    return tweet_stemmed
+
+def stem(tweet_clean):
+    """"
+    Return stems of the words in the tweet
+    """
     # Stemming
 
 
@@ -64,10 +67,31 @@ def process_tweet(tweet):
     for word in tweet_clean:
         stem_word=stemmer.stem(word)
         tweet_stemmed.append(stem_word)
-    
-    
 
     return tweet_stemmed
+
+def remove_stopwords(tweet_tokens, stopwords_english):
+    """
+    Remove stopwords
+    """
+    tweet_clean=[]# clean tweet i.e. without stopwords
+
+    for word in tweet_tokens:
+        if word not in stopwords_english and word not in string.punctuation:
+            tweet_clean.append(word)
+    return tweet_clean
+
+def tokenize(tweet2):
+    """
+    Tokenize the tweet
+    """
+    # Tokenize the string and lowercase it
+    tokenizer = TweetTokenizer(preserve_case=False, strip_handles=True,
+                               reduce_len=True)
+    
+    tweet_tokens=tokenizer.tokenize(tweet2)
+    
+    return tweet_tokens
 
 
 print(process_tweet("This is is good @kim, @n, @123T_ #winning"))
