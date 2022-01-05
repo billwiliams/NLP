@@ -53,7 +53,7 @@ def process_tweet(tweet):
 
     return tweet_stemmed
 
-def stem(tweet_clean):
+def stem(tweet):
     """"
     Return stems of the words in the tweet
     """
@@ -64,7 +64,7 @@ def stem(tweet_clean):
 
     stemmer=PorterStemmer()
 
-    for word in tweet_clean:
+    for word in tweet:
         stem_word=stemmer.stem(word)
         tweet_stemmed.append(stem_word)
 
@@ -81,7 +81,7 @@ def remove_stopwords(tweet_tokens, stopwords_english):
             tweet_clean.append(word)
     return tweet_clean
 
-def tokenize(tweet2):
+def tokenize(tweet):
     """
     Tokenize the tweet
     """
@@ -89,7 +89,7 @@ def tokenize(tweet2):
     tokenizer = TweetTokenizer(preserve_case=False, strip_handles=True,
                                reduce_len=True)
     
-    tweet_tokens=tokenizer.tokenize(tweet2)
+    tweet_tokens=tokenizer.tokenize(tweet)
     
     return tweet_tokens
 
