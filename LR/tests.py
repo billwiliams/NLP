@@ -1,14 +1,25 @@
-from unittest import Testcase
+import unittest
+
 
 from LR import sigmoid
 from utils import build_features,process_tweet
 
-# tests for the functions
+class TestLogisticRegression(unittest.TestCase):
+   
 
-def test_build_features(build_features):
-    pass
-def test_process_tweet(process_tweet):
-    pass
+    # tests for the functions
 
-def test_sigmoid(sigmoid):
-    pass
+    def test_build_features(build_features):
+        pass
+    def test_process_tweet(process_tweet):
+        pass
+
+    def test_sigmoid(sigmoid):
+        pass
+    def test_predict(predict):
+        """tests the predict function
+
+        Args:
+            predict ([function]): [function to predict sentiment]
+        """
+        pass
