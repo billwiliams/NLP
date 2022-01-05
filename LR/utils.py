@@ -93,10 +93,36 @@ def tokenize(tweet2):
     
     return tweet_tokens
 
+tweet=["This is is good @kim, @n, @123T_ #winning"]
+print(process_tweet(tweet[0]))
 
-print(process_tweet("This is is good @kim, @n, @123T_ #winning"))
-def build_features():
-    pass
+
+
+
+def build_features(tweets,sentiments):
+    """
+    Build frequencies.
+    Input:
+        tweets: a list of tweets
+        sentiments: an m x 1 array with the sentiment label of each tweet
+            (either 0 or 1)
+    Output:
+        freqs: a dictionary mapping each (word, sentiment) pair to its
+        frequency
+    
+    """
+    freqs={}
+    for tweet,sentiment in zip(tweets,sentiments):
+        for word in process_tweet(tweet):
+            
+            if (word,sentiment) in freqs:
+                freqs[(word,sentiment)]+=1
+            else:
+                freqs[(word,sentiment)]=1
+    return freqs
+    
+print(build_features(tweet,[1]))
+
 
 
    
