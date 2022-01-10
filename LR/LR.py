@@ -6,6 +6,44 @@ from utils import process_tweet,build_features,prepare_data
 
 train_x,train_y,test_x,test_y=prepare_data()
 
+freqs= build_features(train_x,train_y)
+
+def extract_features(tweet,freq,process_tweet=process_tweet):
+    """
+    Given a list of tweets, extract the features and store them in a matrix. 
+    The first feature is the number of positive words in a tweet.
+    The second feature is the number of negative words in a tweet.
+
+    Input: 
+        tweet: a list of words for one tweet
+        freqs: a dictionary corresponding to the frequencies of each tuple (word, label)
+    Output: 
+        x: a feature vector of dimension (1,3)
+    """
+    X=np.ones((1,3))
+
+    #set bias term to 1
+    X[0.0]=1
+    
+    # process the tweet
+    words= process_tweet(tweet)
+
+    for word in words:
+
+        # increment positive count
+        if (word,1) in freqs:
+            X[0,1] += freqs[(word,1)]
+        
+        # increment negative count
+        if (word,1) in freqs:
+            X[0,2] += freqs[(word,0)]
+    
+    return X
+
+
+
+
+
 def sigmoid(z):
     """
     compute sigmoid
@@ -18,8 +56,6 @@ def sigmoid(z):
 
     return 1/(1+np.exp(-z))
 
-def cost():
-    
 def gradient_descent(x,y,alpha,theta,num_iters):
     """perform gradient descent while updating weights 
 
@@ -48,7 +84,7 @@ def gradient_descent(x,y,alpha,theta,num_iters):
         theta = theta -alpha/m *(np.dot(x.T,(h-y)))
     
     return J,theta
-    
+
         
 
 def predict():
