@@ -5,8 +5,10 @@ from utils import process_tweet,build_features,prepare_data
 # get training data 
 
 train_x,train_y,test_x,test_y=prepare_data()
+#print(train_y)
 
-freqs= build_features(train_x,train_y)
+
+# freqs= build_features(train_x,train_y)
 
 def extract_features(tweet,freq,process_tweet=process_tweet):
     """
@@ -23,7 +25,7 @@ def extract_features(tweet,freq,process_tweet=process_tweet):
     X=np.ones((1,3))
 
     #set bias term to 1
-    X[0.0]=1
+    X[0,0]=1
     
     # process the tweet
     words= process_tweet(tweet)
@@ -89,4 +91,20 @@ def gradient_descent(x,y,alpha,theta,num_iters):
 
 def predict():
     pass
+
+# ## Training the model
+# X = np.zeros((len(train_x), 3))
+# for i in range(len(train_x)):
+#     X[i, :]= extract_features(train_x[i], freqs)
+
+# # training labels corresponding to X
+# Y = train_y
+
+# # Apply gradient descent
+
+# J, theta = gradient_descent(X, Y, np.zeros((3, 1)), 1e-9, 1500)
+# print(f"The cost after training is {J:.8f}.")
+# print(f"The resulting vector of weights is {[round(t, 8) for t in np.squeeze(theta)]}")
+
+
 
