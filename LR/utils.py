@@ -113,17 +113,20 @@ def build_features(tweets,sentiments):
     """
     freqs={}
     for sentiment,tweet in zip(sentiments,tweets):
+        
+        
 
         for word in process_tweet(tweet):
+
+            pair=(word,sentiment[0])        
             
-            
-            if (word,sentiment) in freqs:
-                freqs[(word,sentiment)]+=1
+            if pair in freqs:
+                freqs[pair]+=1
             else:
-                freqs[(word,sentiment)]=1
+                freqs[pair]=1
     return freqs
     
-print(build_features(tweet,[1]))
+# print(build_features(tweet,[1.]))
 
 
 def prepare_data():
@@ -147,7 +150,7 @@ def prepare_data():
     
     # check the sizes of the training and testing data
     print("training data shape is {}",train_y.shape)
-    print("training data shape is {}",test_y.shape)
+    print("testing data shape is {}",test_y.shape)
    
 
     return train_x,train_y,test_x,test_y

@@ -5,12 +5,12 @@ from utils import process_tweet,build_features,prepare_data
 # get training data 
 
 train_x,train_y,test_x,test_y=prepare_data()
-#print(train_y)
 
 
-# freqs= build_features(train_x,train_y)
+freqs= build_features(train_x,train_y)
 
-def extract_features(tweet,freq,process_tweet=process_tweet):
+
+def extract_features(tweet,freqs,process_tweet=process_tweet):
     """
     Given a list of tweets, extract the features and store them in a matrix. 
     The first feature is the number of positive words in a tweet.
@@ -37,7 +37,7 @@ def extract_features(tweet,freq,process_tweet=process_tweet):
             X[0,1] += freqs[(word,1)]
         
         # increment negative count
-        if (word,1) in freqs:
+        if (word,0) in freqs:
             X[0,2] += freqs[(word,0)]
     
     return X
@@ -74,7 +74,7 @@ def gradient_descent(x,y,alpha,theta,num_iters):
     # number of rows in matrix x
     m=x.shape[0]
 
-    for i in range(num_iters):
+    for i in range(0,num_iters):
 
         z=np.dot(x,theta) # dot product of x and theta
 
@@ -85,6 +85,7 @@ def gradient_descent(x,y,alpha,theta,num_iters):
         # update the weights
         theta = theta -alpha/m *(np.dot(x.T,(h-y)))
     
+    J = float(J)
     return J,theta
 
         
@@ -92,19 +93,21 @@ def gradient_descent(x,y,alpha,theta,num_iters):
 def predict():
     pass
 
-# ## Training the model
-# X = np.zeros((len(train_x), 3))
-# for i in range(len(train_x)):
-#     X[i, :]= extract_features(train_x[i], freqs)
+## Training the model
+X = np.zeros((len(train_x), 3))
+for i in range(len(train_x)):
+    X[i, :]= extract_features(train_x[i], freqs)
 
-# # training labels corresponding to X
-# Y = train_y
+# training labels corresponding to X
+Y = train_y
 
-# # Apply gradient descent
+# Apply gradient descent
 
-# J, theta = gradient_descent(X, Y, np.zeros((3, 1)), 1e-9, 1500)
-# print(f"The cost after training is {J:.8f}.")
-# print(f"The resulting vector of weights is {[round(t, 8) for t in np.squeeze(theta)]}")
+J, theta = gradient_descent(X, Y, np.zeros((3, 1)), 1e-9, 1500)
 
+
+print(f"The cost after training is {J:.8f}.")
+
+print(f"The resulting vector of weights is {[round(t, 8) for t in np.squeeze(theta)]}")
 
 
