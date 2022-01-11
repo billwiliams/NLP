@@ -95,8 +95,21 @@ def gradient_descent(x,y,theta,alpha,num_iters):
     return J, theta
         
 
-def predict():
-    pass
+def predict(tweet, freqs,theta):
+    """[summary]
+
+    Args:
+        tweet : a string 
+        freqs  dictionary containing the word frequencey count
+        theta : weights vector after training
+    """
+    x= extract_features(tweet,freqs)
+
+    pred=sigmoid(np.dot(x,theta))
+
+    return pred
+
+
 
 
 
@@ -120,3 +133,7 @@ print(f"The cost after training is {J:.8f}.")
 print(f"The resulting vector of weights is {[round(t, 8) for t in np.squeeze(theta)]}")
 
 
+if predict("happy :)",freqs,theta)>0.5:
+     print ("positive")
+else:
+    print("negative")
