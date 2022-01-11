@@ -96,11 +96,6 @@ def tokenize(tweet):
     
     return tweet_tokens
 
-tweet=["This is is good @kim, @n, @123T_ #winning :)"]
-print(process_tweet(tweet[0]))
-
-
-
 
 def build_features(tweets,sentiments):
     """
@@ -129,7 +124,6 @@ def build_features(tweets,sentiments):
                 freqs[pair]=1
     return freqs
     
-# print(build_features(tweet,[1.]))
 
 
 def prepare_data():

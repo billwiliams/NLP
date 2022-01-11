@@ -73,7 +73,6 @@ def gradient_descent(x,y,theta,alpha,num_iters):
     """
     # number of rows in matrix x
     m = x.shape[0]
-    print(m)
     
     for i in range(0, num_iters):
         
@@ -110,7 +109,15 @@ def predict(tweet, freqs,theta):
     return pred
 
 
+def accuracy(y_hat,y):
+    """Computes accuracy given the predictions and true labels
 
+    Args:
+        y_hat : the predictions from the model
+        y : True labels from the data
+    """
+
+    return ((np.sum(y_hat==y.flatten()))/len(y))*100
 
 
 
@@ -133,7 +140,17 @@ print(f"The cost after training is {J:.8f}.")
 print(f"The resulting vector of weights is {[round(t, 8) for t in np.squeeze(theta)]}")
 
 
-if predict("happy :)",freqs,theta)>0.5:
-     print ("positive")
-else:
-    print("negative")
+# Testing accuracy on the test set
+y_hat=[] 
+
+for i in range(len(test_x)):
+    prediction=predict(test_x[i],freqs,theta)
+    if prediction>0.5:
+        y_hat.append(1.0)
+    else:
+        y_hat.append(0.0)
+
+print(f"Accuracy on the test set is { accuracy(y_hat,test_y):.2f}.")
+
+
+
