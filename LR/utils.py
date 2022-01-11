@@ -24,7 +24,8 @@ def process_tweet(tweet):
 
     """
     # remove handles form the tweet
-    tweet2= re.sub(r'@([A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)','',tweet)
+    tweet2= re.sub(r'@\w+','',tweet)
+
     # remove old style RT from tweet
     tweet2=re.sub(r'^RT[\s]+', '', tweet2)
 
@@ -34,6 +35,7 @@ def process_tweet(tweet):
     
     # remove hashtags from the tweet
     tweet2= re.sub(r'#','', tweet2)
+
 
     tweet_tokens = tokenize(tweet2)
 
@@ -91,9 +93,10 @@ def tokenize(tweet):
     
     tweet_tokens=tokenizer.tokenize(tweet)
     
+    
     return tweet_tokens
 
-tweet=["This is is good @kim, @n, @123T_ #winning"]
+tweet=["This is is good @kim, @n, @123T_ #winning :)"]
 print(process_tweet(tweet[0]))
 
 

@@ -39,7 +39,7 @@ def extract_features(tweet,freqs,process_tweet=process_tweet):
         # increment negative count
         if (word,0) in freqs:
             X[0,2] += freqs[(word,0)]
-    
+    assert(X.shape == (1, 3))
     return X
 
 
@@ -58,7 +58,7 @@ def sigmoid(z):
 
     return 1/(1+np.exp(-z))
 
-def gradient_descent(x,y,alpha,theta,num_iters):
+def gradient_descent(x,y,theta,alpha,num_iters):
     """perform gradient descent while updating weights 
 
     Args:
@@ -72,33 +72,42 @@ def gradient_descent(x,y,alpha,theta,num_iters):
         theta: final weight vector
     """
     # number of rows in matrix x
-    m=x.shape[0]
+    m = x.shape[0]
+    print(m)
+    
+    for i in range(0, num_iters):
+        
+        # get z, the dot product of x and theta
+        z = np.dot(x,theta)
+        
+        
+        # get the sigmoid of z
+        h = sigmoid(z)
+        
+        # calculate the cost function
+        J = (-1/m)*(np.dot(y.T,np.log(h))+np.dot((1-y).T , np.log(1-h)))
 
-    for i in range(0,num_iters):
-
-        z=np.dot(x,theta) # dot product of x and theta
-
-        h= sigmoid(z) # sigmoid of z
-
-        J = (-1/m)*(np.dot(y.T,np.log(h))+np.dot((1-y).T , np.log(1-h))) # calculate the cost function
-
-        # update the weights
+        # update the weights theta
         theta = theta -alpha/m *(np.dot(x.T,(h-y)))
+        
     
     J = float(J)
-    return J,theta
-
+    return J, theta
         
 
 def predict():
     pass
 
-## Training the model
+
+
+
+
+# ## Training the model
 X = np.zeros((len(train_x), 3))
 for i in range(len(train_x)):
     X[i, :]= extract_features(train_x[i], freqs)
 
-# training labels corresponding to X
+#training labels corresponding to X
 Y = train_y
 
 # Apply gradient descent
