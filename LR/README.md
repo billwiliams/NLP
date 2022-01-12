@@ -10,6 +10,17 @@ implementing logistic regression for sentiment analysis on tweets. Given a tweet
 * Testing using your logistic regression
 * Error analysis
 
+### Files
+
+* LR- contains the logistic regression implementation, training and testing 
+* utils- contains helper functions 
+* tests- contains tests  
+
+### Executing the code
+
+Run LR from the command line `python LR.py` 
+
+
 ### Import some helper functions from the  utils.py file
 
 * process_tweet: cleans the text, tokenizes it into separate words, removes stopwords, and converts words to stems.
