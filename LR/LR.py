@@ -117,7 +117,7 @@ def accuracy(y_hat,y):
         y : True labels from the data
     """
 
-    return ((np.sum(y_hat==y.flatten()))/len(y))*100
+    return ((np.sum(y_hat==y))/len(y))*100
 
 
 
@@ -150,7 +150,22 @@ for i in range(len(test_x)):
     else:
         y_hat.append(0.0)
 
-print(f"Accuracy on the test set is { accuracy(y_hat,test_y):.2f}.")
+print(f"Accuracy on the test set is {accuracy(y_hat,test_y.flatten()):.2f}.")
+
+#Error analysis for misclassified tweets
+
+for x,y in zip(test_x,test_y):
+    pred=predict(x,freqs,theta)
+    if pred>0.5:
+        pred=1.0
+    else:
+        pred=0.0
+
+    if y!=pred:
+        print("misclassified tweet\n")
+        print(x+"\n")
+        print(f"predicted label {pred}  correct label {y}")
+
 
 
 
