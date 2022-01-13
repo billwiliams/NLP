@@ -1,12 +1,28 @@
+import sys
+sys.path.append('../LR/')
+
 import numpy as np
-from LR.utils import process_tweet,build_features,prepare_data
+from utils import process_tweet,build_features,prepare_data
 
 # get the tweets data 
 train_x,train_y,test_x,test_y= prepare_data()
 
 # build a frequency dictionary using the training data
 freqs=build_features(train_x,train_y)
-print(freqs[0])
+
+def lookup(freqs,word,sentiment):
+    """ returns the number of occurencies of the word,sentiment in the freqs dictionary
+
+    Input:
+        freqs: dictionary from (word, label) to how often the word appears
+        word: specific processed word in the tweet
+        sentiment: labels correponding to the word (0,1)
+    Output:
+        count: the number of occurencies of the word in the data if none it returns 0
+    
+    """
+
+    return freqs.get((word,sentiment),0)
 
 def naive_bayes(freqs,train_x,train_y):
     """Input:
@@ -34,7 +50,7 @@ def naive_bayes(freqs,train_x,train_y):
         if label==1:
             N_pos+=freqs[pair]
         else:
-            N_neg=freqs[pair]
+            N_neg+=freqs[pair]
     # Number of Documents (D) in the training data
     D=len(train_y)
 
@@ -51,8 +67,8 @@ def naive_bayes(freqs,train_x,train_y):
     for word in vocab:
 
         # get the positive and negative frequencies
-        freq_pos=freqs[(word,1)]
-        freq_neg=freqs[(word,0)]
+        freq_pos=lookup(freqs,word,1)
+        freq_neg=lookup(freqs,word,0)
 
         # calculate the probability that each word is positive, and negative
         p_w_pos = (freq_pos+1)/(N_pos+V)
@@ -83,11 +99,21 @@ def naive_bayes_predict(tweet,logprior,loglikelihood):
     # add the logprior
     p += logprior
 
-    for word in process_tweet:
+    for word in processed_tweet:
         # add loglikelihood
-        p+=loglikelihood(word)
+        p+=loglikelihood[word]
 
     return p
+
+#Training Naive Bayes classifier
+logprior, loglikelihood = naive_bayes(freqs, train_x, train_y)
+print(logprior)
+print(len(loglikelihood))
+
+#Testing Naive Bayes
+my_tweet = 'She smiled.'
+p = naive_bayes_predict(my_tweet, logprior, loglikelihood)
+print('The expected output is', p)
 
 
 
