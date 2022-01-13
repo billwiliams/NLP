@@ -85,3 +85,20 @@ $$ P(W_{neg}) = \frac{freq_{neg} + 1}{N_{neg} + V}\tag{5} $$
 **Note:** We'll use a dictionary to store the log likelihoods for each word.  The key is the word, the value is the log likelihood of that word).
 
 - We can then compute the loglikelihood: $log \left( \frac{P(W_{pos})}{P(W_{neg})} \right)$.
+
+# Testing  naive bayes
+
+After computing `logprior` and `loglikelihood`, we can test the naive bayes function by making predicting on some tweets!
+
+The `naive_bayes_predict` function makes predictions on tweets.
+* The function takes in the `tweet`, `logprior`, `loglikelihood`.
+* It returns the probability that the tweet belongs to the positive or negative class.
+* For each tweet, we sum up loglikelihoods of each word in the tweet.
+* Also add the logprior to this sum to get the predicted sentiment of that tweet.
+
+$$ p = logprior + \sum_i^N (loglikelihood_i)$$
+
+#### Note
+Note we calculate the prior from the training data, and that the training data is evenly split between positive and negative labels (4000 positive and 4000 negative tweets).  This means that the ratio of positive to negative 1, and the logprior is 0.
+
+The value of 0.0 means that when we add the logprior to the log likelihood, we're just adding zero to the log likelihood.  However,  whenever the data is not perfectly balanced, the logprior will be a non-zero value.

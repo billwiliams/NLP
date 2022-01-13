@@ -62,7 +62,33 @@ def naive_bayes(freqs,train_x,train_y):
         loglikelihood[word] = np.log(p_w_pos/p_w_neg)
     
     return logprior,loglikelihood
-    
+
+
+
+def naive_bayes_predict(tweet,logprior,loglikelihood):
+    """Input:
+        tweet: a string
+        logprior: a number
+        loglikelihood: a dictionary of words mapping to numbers
+    Output:
+        p: the sum of all the logliklihoods of each word in the tweet (if found in the dictionary) + logprior (a number)
+
+    """
+    # process the tweet
+    processed_tweet=process_tweet(tweet)
+
+    # initialize probability to zero
+    p = 0.0
+
+    # add the logprior
+    p += logprior
+
+    for word in process_tweet:
+        # add loglikelihood
+        p+=loglikelihood(word)
+
+    return p
+
 
 
 
