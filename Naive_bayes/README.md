@@ -102,3 +102,69 @@ $$ p = logprior + \sum_i^N (loglikelihood_i)$$
 Note we calculate the prior from the training data, and that the training data is evenly split between positive and negative labels (4000 positive and 4000 negative tweets).  This means that the ratio of positive to negative 1, and the logprior is 0.
 
 The value of 0.0 means that when we add the logprior to the log likelihood, we're just adding zero to the log likelihood.  However,  whenever the data is not perfectly balanced, the logprior will be a non-zero value.
+
+#  Error Analysis
+
+Checking some tweets that the model missclassified. 
+- @jaredNOTsubway @iluvmariah @Bravotv Then that truly is a LATERAL move! Now, we all know the Queen Bee is UPWARD BOUND : ) #MovingOnUp
+
+    predicted 0
+
+    correct label [1.]
+
+- A new report talks about how we burn more calories in the cold, because we work harder to warm up. Feel any better about the weather? :p
+
+    predicted 0
+
+    correct label [1.]
+
+- Harry and niall and -94 (when harry was born) ik it's stupid and i wanna change it :D https://t.co/gHAt8ZDAfF
+
+    predicted 0
+
+    correct label [1.]
+
+- off to the park to get some sunlight : )
+
+    predicted 0
+
+    correct label [1.]
+
+- @msarosh Uff Itna Miss karhy thy ap :p
+
+    predicted 0
+    correct label [1.]
+
+- @rcdlccom hello, any info about possible interest in Jonathas ?? He is close to join Betis :( greatings
+
+    predicted 1
+
+    correct label [0.]
+
+-   @phenomyoutube u probs had more fun with david than me : (
+
+  predicted 1
+    correct label [0.]
+
+- pats jay : (
+    predicted 1
+    correct label [0.]
+
+- Sr. Financial Analyst - Expedia, Inc.: (#Bellevue, WA) http://t.co/ktknMhvwCI #Finance #ExpediaJobs #Job #Jobs #Hiring
+
+    predicted 1
+
+    correct label [0.]
+
+
+
+
+
+# Filter words by Ratio of positive to negative counts
+
+- Some words have more positive counts than others, and can be considered "more positive".  Likewise, some words can be considered more negative than others.
+- One way  to define the level of positiveness or negativeness, without calculating the log likelihood, is to compare the positive to negative frequency of the word.
+    - Note that we can also use the log likelihood calculations to compare relative positivity or negativity of words.
+- We can calculate the ratio of positive to negative frequencies of a word.
+- Once we're able to calculate these ratios, we can also filter a subset of words that have a minimum ratio of positivity / negativity or higher.
+- Similarly, we can also filter a subset of words that have a maximum ratio of positivity / negativity or lower (words that are at least as negative, or even more negative than a given threshold).

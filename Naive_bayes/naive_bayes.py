@@ -147,9 +147,9 @@ for tweet,label in zip(test_x,test_y):
     pred=naive_bayes_predict(tweet,logprior,loglikelihood)
     # print misclassified tweets
     if pred>0 and label==0.0:
-        print(f"{tweet} \n predicted 0 \n correct label {label}")
-    if pred<0 and label==1.0:
         print(f"{tweet} \n predicted 1 \n correct label {label}")
+    if pred<0 and label==1.0:
+        print(f"{tweet} \n predicted 0 \n correct label {label}")
 
 
 # Checking for more positive words
