@@ -101,7 +101,7 @@ def naive_bayes_predict(tweet,logprior,loglikelihood):
 
     for word in processed_tweet:
         # add loglikelihood
-        p+=loglikelihood[word]
+        p+=loglikelihood.get(word,0)
 
     return p
 
@@ -114,6 +114,57 @@ print(len(loglikelihood))
 my_tweet = 'She smiled.'
 p = naive_bayes_predict(my_tweet, logprior, loglikelihood)
 print('The expected output is', p)
+
+## checking performance on the test set
+
+def predict_on_test_set(test_x,test_y,logprior,loglikelihood):
+    """check performance on the test set
+
+    Args:
+        test_x : testing features
+        test_y : testing labels
+        logprior:the log prior.
+        loglikelihood: the log likelihood of you Naive bayes equation.
+    """
+    y_hat=[]
+    for tweet in test_x:
+        pred=naive_bayes_predict(tweet,logprior,loglikelihood)
+        if pred>0:
+            y_hat.append(1.0)
+        else:
+            y_hat.append(0.0)
+    accuracy=(sum(y_hat==test_y.flatten())/len(y_hat))*100
+    print(f"The accuracy of Naive Bayes on test set is {accuracy:.2f} \n")
+   
+    
+    
+# Check prediction on the test set
+predict_on_test_set(test_x,test_y,logprior,loglikelihood)
+
+# Error Analysis
+for tweet,label in zip(test_x,test_y):
+    
+    pred=naive_bayes_predict(tweet,logprior,loglikelihood)
+    # print misclassified tweets
+    if pred>0 and label==0.0:
+        print(f"{tweet} \n predicted 0 \n correct label {label}")
+    if pred<0 and label==1.0:
+        print(f"{tweet} \n predicted 1 \n correct label {label}")
+
+
+# Checking for more positive words
+        
+            
+            
+        
+           
+
+
+
+
+
+
+
 
 
 
