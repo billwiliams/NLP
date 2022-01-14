@@ -195,7 +195,12 @@ def get_words_by_threshold(pos_neg_ratio,threshold=0.5):
                 print(f"{pos_neg_ratio[word][0]} ratio {pos_neg_ratio[word][3]}")
 
 pos_neg_ratio=get_pos_neg_ratio(freqs)
-get_words_by_threshold(pos_neg_ratio,10)           
+
+# Print very negative words
+get_words_by_threshold(pos_neg_ratio,0.05)  
+
+# print very positive words
+get_words_by_threshold(pos_neg_ratio,0.05)   
 
         
             
