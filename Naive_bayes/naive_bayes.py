@@ -142,17 +142,61 @@ def predict_on_test_set(test_x,test_y,logprior,loglikelihood):
 predict_on_test_set(test_x,test_y,logprior,loglikelihood)
 
 # Error Analysis
-for tweet,label in zip(test_x,test_y):
+# for tweet,label in zip(test_x,test_y):
     
-    pred=naive_bayes_predict(tweet,logprior,loglikelihood)
-    # print misclassified tweets
-    if pred>0 and label==0.0:
-        print(f"{tweet} \n predicted 1 \n correct label {label}")
-    if pred<0 and label==1.0:
-        print(f"{tweet} \n predicted 0 \n correct label {label}")
+#     pred=naive_bayes_predict(tweet,logprior,loglikelihood)
+#     # print misclassified tweets
+#     if pred>0 and label==0.0:
+#         print(f"{tweet} \n predicted 1 \n correct label {label}")
+#     if pred<0 and label==1.0:
+#         print(f"{tweet} \n predicted 0 \n correct label {label}")
 
 
 # Checking for more positive words
+# we can use the loglikelihood and set a  threshold or get the ration of the psotive and negative of the words
+
+def get_pos_neg_ratio(freqs):
+    """get the positive negative ratio of the words in the freqs dictionary
+
+    Args:
+        freqs: dictionary containing words and their postive negative count
+    """
+    pos_neg_ratio={}
+    for word,label in freqs:
+
+        # positive count
+        positive_count=freqs.get((word,1),0)
+
+        # negative count
+        negative_count=freqs.get((word,0),0)
+
+        # add the values to the dictionary
+
+        # compute ratio and add it to dict
+        ratio=(positive_count+1)/(negative_count+1)
+        pos_neg_ratio[word]=[word,positive_count,negative_count,ratio]
+
+    return pos_neg_ratio
+
+def get_words_by_threshold(pos_neg_ratio,threshold=0.5):
+    """Obtain words that meet a certain threshold based on the ratio
+
+    Args:
+        pos_neg_ratio : dcitionary containing the words and their rations
+        threshold (float, optional): threshold. Defaults to 0.5.
+    """
+    for word in pos_neg_ratio:
+        ratio=pos_neg_ratio[word][3]
+        if threshold>1:
+            if ratio>=threshold:
+                print(f"{pos_neg_ratio[word][0]} ratio {pos_neg_ratio[word][3]}")
+        else:
+            if ratio<=threshold:
+                print(f"{pos_neg_ratio[word][0]} ratio {pos_neg_ratio[word][3]}")
+
+pos_neg_ratio=get_pos_neg_ratio(freqs)
+get_words_by_threshold(pos_neg_ratio,10)           
+
         
             
             
