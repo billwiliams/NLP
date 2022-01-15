@@ -168,3 +168,83 @@ Checking some tweets that the model missclassified.
 - We can calculate the ratio of positive to negative frequencies of a word.
 - Once we're able to calculate these ratios, we can also filter a subset of words that have a minimum ratio of positivity / negativity or higher.
 - Similarly, we can also filter a subset of words that have a maximum ratio of positivity / negativity or lower (words that are at least as negative, or even more negative than a given threshold).
+
+#### **More Negative words (threshold of less  0.05)**
+    :( ratio 0.000544069640914037
+
+    :-( ratio 0.002583979328165375
+
+    zayniscomingbackonjuli ratio 0.05
+
+    26 ratio 0.047619047619047616
+
+    >:( ratio 0.022727272727272728
+
+    lost ratio 0.05
+
+    ♛ ratio 0.004739336492890996
+
+    》 ratio 0.004739336492890996
+
+    beli̇ev ratio 0.027777777777777776
+
+    wi̇ll ratio 0.027777777777777776
+
+    justi̇n ratio 0.027777777777777776
+
+    ｓｅｅ ratio 0.027777777777777776
+
+    ｍｅ ratio 0.027777777777777776
+
+#### **More positive words threshold of (8.0)**
+    followfriday ratio 24.0
+    engag ratio 8.0
+    commun ratio 14.0
+    :) ratio 987.0
+    flipkartfashionfriday ratio 17.0
+    happi ratio 8.578947368421053
+    friday ratio 9.2
+    :d ratio 524.0
+    :p ratio 106.0
+    influenc ratio 17.0
+    great ratio 8.5
+    opportun ratio 9.0
+    :-) ratio 553.0
+    here' ratio 21.0
+    youth ratio 15.0
+    bam ratio 45.0
+    warsaw ratio 45.0
+    shout ratio 12.0
+    twitch ratio 8.0
+    ;) ratio 23.0
+    welcom ratio 9.166666666666666
+    stat ratio 52.0
+    arriv ratio 11.6
+    via ratio 8.222222222222221
+    appreci ratio 9.666666666666666
+    invit ratio 8.0
+    glad ratio 14.0
+    blog ratio 28.0
+    fav ratio 12.0
+    goodnight ratio 9.5
+    vid ratio 9.0
+    fantast ratio 10.0
+    braindot ratio 9.0
+    men ratio 9.0
+    ff ratio 8.2
+    recent ratio 9.0
+    fback ratio 27.0
+    goodmorn ratio 8.0
+    spread ratio 8.0
+    ceo ratio 9.0
+    1month ratio 9.0
+    follback ratio 9.5
+    hehe ratio 9.0
+    wick ratio 9.0
+    earth ratio 8.0
+    pleasur ratio 11.0
+    minecraft ratio 8.0
+    💙 ratio 9.0
+    ← ratio 10.0
+    aqui ratio 10.0
+

@@ -200,7 +200,7 @@ pos_neg_ratio=get_pos_neg_ratio(freqs)
 get_words_by_threshold(pos_neg_ratio,0.05)  
 
 # print very positive words
-get_words_by_threshold(pos_neg_ratio,0.05)   
+get_words_by_threshold(pos_neg_ratio,8.0)   
 
         
             
