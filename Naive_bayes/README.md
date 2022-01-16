@@ -20,7 +20,7 @@ $P(D_{pos})$ is the probability that the document is positive.
 $P(D_{neg})$ is the probability that the document is negative.
 Using the formulas as follows and store the values in a dictionary:
 
-$$P(D_{pos}) = \frac{D_{pos}}{D}\tag{1}$$
+<img src="https://render.githubusercontent.com/render/math?math=$$P(D_{pos}) = \frac{D_{pos}}{D}\tag{1}$$">
 
 $$P(D_{neg}) = \frac{D_{neg}}{D}\tag{2}$$
 
