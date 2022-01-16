@@ -18,7 +18,10 @@ class TestNaiveBayes(unittest.TestCase):
     def test_naive_bayes_predict(self):
         pass
     def test_predict_on_test_set(self):
-        pass
+        logprior,loglikelihood=0.0, {'am': 0.0, ':(': -0.6931471805599453, 'happi': 0.6931471805599453}
+
+        #self.assertEqual(predict_on_test_set(self.test_x,self.test_y,logprior,loglikelihood),100)
+        
 
 if __name__ == '__main__':
     unittest.main()
