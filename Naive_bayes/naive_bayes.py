@@ -133,14 +133,18 @@ def predict_on_test_set(test_x,test_y,logprior,loglikelihood):
             y_hat.append(1.0)
         else:
             y_hat.append(0.0)
-    accuracy=(sum(y_hat==test_y)/len(y_hat))*100
+    
+    accuracy=(sum(y_hat==test_y.flatten())/len(y_hat))*100
+    print(accuracy)
+    
+    
     print(f"The accuracy of Naive Bayes on test set is {accuracy:.2f} \n")
     return accuracy
    
     
     
 # Check prediction on the test set
-predict_on_test_set(test_x,test_y.flatten(),logprior,loglikelihood)
+predict_on_test_set(test_x,test_y,logprior,loglikelihood)
 
 # Error Analysis
 # for tweet,label in zip(test_x,test_y):
