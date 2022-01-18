@@ -12,7 +12,7 @@ Using Naive Bayes for sentiment analysis on tweets. Given a tweet,  decide if it
 
 Naive bayes is an algorithm that could be used for sentiment analysis. It takes a short time to train and also has a short prediction time.
 
-#### So how do you train a Naive Bayes classifier?
+#### Training a Naive Bayes classifier
 - The first part of training a naive bayes classifier is to identify the number of classes that are available.
 
 - We create a probability for each class.
@@ -72,17 +72,17 @@ Given a freqs dictionary, `train_x` (a list of tweets) and a `train_y` (a list o
 - Using the `train_y` input list of labels, we calculate the number of documents (tweets) $D$, as well as the number of positive documents (tweets) $D_{pos}$ and number of negative documents (tweets) $D_{neg}$.
 - We Calculate the probability that a document (tweet) is positive $P(D_{pos})$, and the probability that a document (tweet) is negative $P(D_{neg})$
 
-##### Calculate the logprior
+##### Calculating the logprior
 - the logprior is $log(D_{pos}) - log(D_{neg})$
 
-##### Calculate log likelihood
+##### Calculating log likelihood
 - Finally, we  can iterate over each word in the vocabulary,  to get the positive frequencies, $freq_{pos}$, and the negative frequencies, $freq_{neg}$, for that specific word.
 - We compute the positive probability of each word $P(W_{pos})$, negative probability of each word $P(W_{neg})$ using equations 4 & 5.
 
 $$ P(W_{pos}) = \frac{freq_{pos} + 1}{N_{pos} + V}\tag{4} $$
 $$ P(W_{neg}) = \frac{freq_{neg} + 1}{N_{neg} + V}\tag{5} $$
 
-**Note:** We'll use a dictionary to store the log likelihoods for each word.  The key is the word, the value is the log likelihood of that word).
+**Note:** We use a dictionary to store the log likelihoods for each word.  The key is the word, the value is the log likelihood of that word).
 
 - We can then compute the loglikelihood: $log \left( \frac{P(W_{pos})}{P(W_{neg})} \right)$.
 
@@ -99,7 +99,7 @@ The `naive_bayes_predict` function makes predictions on tweets.
 $$ p = logprior + \sum_i^N (loglikelihood_i)$$
 
 #### Note
-Note we calculate the prior from the training data, and that the training data is evenly split between positive and negative labels (4000 positive and 4000 negative tweets).  This means that the ratio of positive to negative 1, and the logprior is 0.
+We calculate the prior from the training data, and that the training data is evenly split between positive and negative labels (4000 positive and 4000 negative tweets).  This means that the ratio of positive to negative 1, and the logprior is 0.
 
 The value of 0.0 means that when we add the logprior to the log likelihood, we're just adding zero to the log likelihood.  However,  whenever the data is not perfectly balanced, the logprior will be a non-zero value.
 
@@ -160,7 +160,7 @@ Checking some tweets that the model missclassified.
 
 
 
-# Filter words by Ratio of positive to negative counts
+# Filtering words by Ratio of positive to negative counts
 
 - Some words have more positive counts than others, and can be considered "more positive".  Likewise, some words can be considered more negative than others.
 - One way  to define the level of positiveness or negativeness, without calculating the log likelihood, is to compare the positive to negative frequency of the word.
