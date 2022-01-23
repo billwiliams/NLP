@@ -33,3 +33,14 @@ $A$ and $B$ represent the word vectors and $A_i$ or $B_i$ represent index i of t
 * If you get $cos(\theta) =0$, that means that they are orthogonal (or perpendicular).
 * Numbers between 0 and 1 indicate a similarity score.
 * Numbers between -1 and 0 indicate a dissimilarity score.
+
+### 1.4 Finding the country of each capital
+
+We  compute similarities between vectors, and use these to find the capital cities of countries. 
+
+
+**procedure**: 
+- We Iterate over the embeddings dictionary and compute the cosine similarity score between your vector and the current word embedding ensuring that the word is not in the group we are using.
+
+example
+- 1: Athens 2: Greece 3: Baghdad, predicts Iraq
