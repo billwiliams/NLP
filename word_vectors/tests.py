@@ -11,9 +11,9 @@ class TestWordVectors(unittest.TestCase):
         super().__init__(methodName)
     
     def test_cosine_similarity(self):
-        vector=np.random.rand(3,3)
-        print(cosine_similarity(vector,vector))
-        # self.assertEqual(cosine_similarity(vector,vector),1.0)
+        A=np.random.rand(1,1)
+        
+        self.assertEqual(cosine_similarity(A,A),1.0)
         # self.assertEqual(cosine_similarity(vector,vector),0.0)
 
     
