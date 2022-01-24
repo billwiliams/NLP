@@ -86,3 +86,37 @@ def get_country(city1, country1, city2, embeddings, cosine_similarity=cosine_sim
 
 
     return country
+
+# Test with an example . should be Uganda
+print(get_country("Nairobi","Kenya",'Kampala', word_embeddings))
+
+# Test accuracy on the capital cities data in capitals.txt
+
+def accuracy(data,embeddings):
+    """returns the accuracy by checking against countries data in the capitals.txt file
+
+    Args:
+        data : pandas dataframe containing all the country and capital city pairs
+        embeddings : word_embeddings.
+    output:
+        accuracy (float): number_of_correct_predictions/ lenght_of_data 
+    """
+    
+    correct_preds=0
+
+    for i,row in data.iterrows():
+        city1=row[0]
+        country1=row[1]
+        city2=row[2]
+        country2=row[3]
+
+        country,_=get_country(city1,country1,city2,embeddings)
+        if country== country2:
+            correct_preds+=1
+
+    countries=len(data)
+    return correct_preds/countries
+
+# Compute the accuracy on Contries capital pairs data
+accuracy = accuracy(data,word_embeddings)
+print(f"Accuracy is {accuracy:.2f}")
