@@ -12,8 +12,9 @@ class TestWordVectors(unittest.TestCase):
     
     def test_cosine_similarity(self):
         A=np.random.rand(1,1)
+        B=np.random.randint(1,size=1)
         
-        self.assertEqual(cosine_similarity(A,A),1.0)
+        self.assertEqual(cosine_similarity(A,A)[0][0],1.0)
         # self.assertEqual(cosine_similarity(vector,vector),0.0)
 
     
