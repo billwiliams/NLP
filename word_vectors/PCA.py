@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn as sklearn
+import pickle
 
 # Implementation of PCA algorithm for dimensionality reduction to enable 
 # view the word vectors relationships from the document corpus
@@ -61,17 +62,27 @@ def pca(X, n_components=2):
 
     return X_reduced
 
-# Testing your function
+
+def get_vectors(embeddings,words):
+    """returns embedding vector of given words
+
+    Args:
+        words : a list of words
+        embeddings : a dictionary contains words as keys and corresponding embeddings
+
+    Returns:
+        matrix: embedding vectors of given words
+    """
+    X=[]
+    for i,word in enumerate(words):
+        en_vec=embeddings.get(word,0)
+        X.append(en_vec)
+    return np.stack(X)
+
+# Testing PCA
 np.random.seed(1)
 X = np.random.rand(3, 10)
-X_reduced = compute_pca(X, n_components=2)
-print("Your original matrix was " + str(X.shape) + " and it became:")
+X_reduced = pca(X, n_components=2)
+print("original matrix was " + str(X.shape) + " and it became:")
 print(X_reduced)
 
-words = ['oil', 'gas', 'happy', 'sad', 'city', 'town',
-         'village', 'country', 'continent', 'petroleum', 'joyful']
-
-# given a list of words and the embeddings, it returns a matrix with all the embeddings
-X = get_vectors(word_embeddings, words)
-
-print('You have 11 words each of 300 dimensions thus X.shape is:', X.shape)
