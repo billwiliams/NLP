@@ -1,6 +1,6 @@
 import numpy as np
 import pickle
-from utils import load_dict,process_tweet
+from utils import load_dict,process_tweet,cosine_similarity
 
 
 # load both engilish and french subsets embeddings
@@ -165,6 +165,37 @@ def align_embeddings(X, Y, train_steps=100, learning_rate=0.0003, verbose=True, 
         R -= learning_rate*gradient
     
     return R
+
+def nearest_neighbor(v, candidates, k=1, cosine_similarity=cosine_similarity):
+    """
+    Input:
+      - v, the vector you are going find the nearest neighbor for
+      - candidates: a set of vectors where we will find the neighbors
+      - k: top k nearest neighbors to find
+    Output:
+      - k_idx: the indices of the top k closest vectors in sorted form
+    """
+    
+    similarity_l = []
+
+    # for each candidate vector...
+    for row in candidates:
+        # get the cosine similarity
+        cos_similarity = cosine_similarity(v,row)
+
+        # append the similarity to the list
+        similarity_l.append(cos_similarity)
+
+    # sort the similarity list and get the indices of the sorted list    
+    sorted_ids = np.argsort(similarity_l)  
+    
+    # Reverse the order of the sorted_ids array
+    sorted_ids = sorted_ids[::-1]
+    
+    # get the indices of the k most similar candidate vectors
+    k_idx = sorted_ids[:k]
+    
+    return k_idx
 
 def test_vocabulary(X, Y, R, nearest_neighbor=nearest_neighbor):
     '''
