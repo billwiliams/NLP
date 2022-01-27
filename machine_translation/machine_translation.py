@@ -1,10 +1,14 @@
 import numpy as np
 import pickle
+from utils import load_dict
 
 
 # load both engilish and french subsets embeddings
 en_embeddings_subset = pickle.load(open("../data/en_embeddings.p", "rb"))
 fr_embeddings_subset = pickle.load(open("../data/fr_embeddings.p", "rb"))
+
+en_fr_train=load_dict("../data/en-fr.train.txt")
+en_fr_test=load_dict("../data/en-fr.test.txt")
 
 def compute_loss(X, Y, R):
     '''
@@ -32,3 +36,4 @@ def compute_loss(X, Y, R):
     loss = sum_diff_squared/m
     
     return loss
+
