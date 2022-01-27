@@ -118,6 +118,25 @@ def compute_loss(X, Y, R):
     
     return loss
 
+def compute_gradient(X, Y, R):
+    '''
+    Inputs: 
+        X: a matrix of dimension (m,n) where the columns are the English embeddings.
+        Y: a matrix of dimension (m,n) where the columns correspong to the French embeddings.
+        R: a matrix of dimension (n,n) - transformation matrix from English to French vector space embeddings.
+    Outputs:
+        g: a scalar value - gradient of the loss function L for given X, Y and R.
+    '''
+   
+    # m is the number of rows in X
+    m = len(X)
+
+    # gradient is X^T(XR - Y) * 2/m    
+    gradient = np.matmul(X.T,((np.matmul(X,R)-Y))) *2/m
+    
+    
+    return gradient
+    
 # getting the training set:
 X_train, Y_train = get_matrices(
     en_fr_train, fr_embeddings_subset, en_embeddings_subset)

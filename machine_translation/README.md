@@ -73,3 +73,15 @@ matrix and its approximation, divided by the number of training examples $m$.
 $$ L(X, Y, R)=\frac{1}{m}\sum_{i=1}^{m} \sum_{j=1}^{n}\left( a_{i j} \right)^{2}$$
 
 where $a_{i j}$ is value in $i$th row and $j$th column of the matrix $\mathbf{XR}-\mathbf{Y}$.
+
+###  2: Computing the gradient of loss in respect to transform matrix R
+
+* Calculating the gradient of the loss with respect to transform matrix `R`.
+* The gradient is a matrix that encodes how much a small change in `R`
+affect the change in the loss function.
+* The gradient gives  the direction in which we should decrease `R`
+to minimize the loss.
+* $m$ is the number of training examples (number of rows in $X$).
+* The formula for the gradient of the loss function $𝐿(𝑋,𝑌,𝑅)$ is:
+
+$$\frac{d}{dR}𝐿(𝑋,𝑌,𝑅)=\frac{d}{dR}\Big(\frac{1}{m}\| X R -Y\|_{F}^{2}\Big) = \frac{2}{m}X^{T} (X R - Y)$$
