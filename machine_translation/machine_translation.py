@@ -1,6 +1,6 @@
 import numpy as np
 import pickle
-from utils import load_dict
+from utils import load_dict,process_tweet
 
 
 # load both engilish and french subsets embeddings
