@@ -85,3 +85,25 @@ to minimize the loss.
 * The formula for the gradient of the loss function $𝐿(𝑋,𝑌,𝑅)$ is:
 
 $$\frac{d}{dR}𝐿(𝑋,𝑌,𝑅)=\frac{d}{dR}\Big(\frac{1}{m}\| X R -Y\|_{F}^{2}\Big) = \frac{2}{m}X^{T} (X R - Y)$$
+
+### 3: Finding the optimal R with gradient descent algorithm
+
+#### Gradient descent
+
+[Gradient descent](https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html) is an iterative algorithm which is used in searching for the optimum of the function. 
+* The gradient of the loss with respect to the matrix encodes how much a tiny change in some coordinate of that matrix affect the change of loss function.
+* Gradient descent uses that information to iteratively change matrix `R` until  a point where the loss is minimized. 
+
+Pseudocode:
+1. Calculate gradient $g$ of the loss with respect to the matrix $R$.
+2. Update $R$ with the formula:
+$$R_{\text{new}}= R_{\text{old}}-\alpha g$$
+
+Where $\alpha$ is the learning rate, which is a scalar.
+#### Learning rate
+
+* The learning rate or "step size" $\alpha$ is a coefficient which decides how much we want to change $R$ in each step.
+* If we change $R$ too much, we could skip the optimum by taking too large of a step.
+* If we make only small changes to $R$, we will need many steps to reach the optimum.
+* Learning rate $\alpha$ is used to control those changes.
+* Values of $\alpha$ are chosen depending on the problem
