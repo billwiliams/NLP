@@ -107,3 +107,10 @@ Where $\alpha$ is the learning rate, which is a scalar.
 * If we make only small changes to $R$, we will need many steps to reach the optimum.
 * Learning rate $\alpha$ is used to control those changes.
 * Values of $\alpha$ are chosen depending on the problem
+
+#### Accuracy
+* The accuracy of the predictions is tested against french and corresponding english words translation on the test set. achieved accuracy is 55.7%
+
+#### Improvements to be done
+1. use fat Knn to speed up checks
+2. more iterations to minimize training loss
