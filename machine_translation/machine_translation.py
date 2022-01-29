@@ -54,6 +54,7 @@ def get_matrices(en_fr, french_vecs, english_vecs):
     # X_l and Y_l are lists of the english and french word embeddings
     X_l = list()
     Y_l = list()
+    en_fr_pairs=list()
 
     # get the english words (the keys in the dictionary) and store in a set()
     english_set = set(english_vecs.keys())
@@ -82,6 +83,7 @@ def get_matrices(en_fr, french_vecs, english_vecs):
 
             # add the french embedding to the list
             Y_l.append(fr_vec)
+            en_fr_pairs.append((en_word,fr_word))
 
     # stack the vectors of X_l into a matrix X
     X = np.stack(X_l)
@@ -89,7 +91,7 @@ def get_matrices(en_fr, french_vecs, english_vecs):
     # stack the vectors of Y_l into a matrix Y
     Y = np.stack(Y_l)
 
-    return X, Y
+    return X, Y,en_fr_pairs
 
 def compute_loss(X, Y, R):
     '''
@@ -197,7 +199,7 @@ def nearest_neighbor(v, candidates, k=1, cosine_similarity=cosine_similarity):
     
     return k_idx
 
-def test_vocabulary(X, Y, R, nearest_neighbor=nearest_neighbor):
+def test_vocabulary(X, Y, R,en_fr_pairs, nearest_neighbor=nearest_neighbor):
     '''
     Input:
         X: a matrix where the columns are the English embeddings.
@@ -215,6 +217,9 @@ def test_vocabulary(X, Y, R, nearest_neighbor=nearest_neighbor):
 
     # initialize the number correct to zero
     num_correct = 0
+    
+    # initialize non correct pair predictions
+    non_correct_pred=list()
 
     # loop through each row in pred (each transformed embedding)
     for i in range(len(pred)):
@@ -225,21 +230,24 @@ def test_vocabulary(X, Y, R, nearest_neighbor=nearest_neighbor):
         if pred_idx == i:
             # increment the number correct by 1.
             num_correct += 1
+        else:
+            non_correct_pred.append(en_fr_pairs[i])
 
     # accuracy is the number correct divided by the number of rows in 'pred' (also number of rows in X)
     accuracy = num_correct/len(pred)
 
 
-    return accuracy
+    return accuracy,non_correct_pred
 
 # getting the training set:
-X_train, Y_train = get_matrices(
+X_train, Y_train,en_fr_train_pairs = get_matrices(
     en_fr_train, fr_embeddings_subset, en_embeddings_subset)
 
 # finding R transformation matrix using align embeddings fucntion to minimize loss
 R_train = align_embeddings(X_train, Y_train, train_steps=400, learning_rate=0.8)
 
-X_val, Y_val = get_matrices(en_fr_test, fr_embeddings_subset, en_embeddings_subset)
+X_val, Y_val,en_fr_test_pairs = get_matrices(en_fr_test, fr_embeddings_subset, en_embeddings_subset)
 
-acc = test_vocabulary(X_val, Y_val, R_train)  # this might take a minute or two
+acc, wrong_preds = test_vocabulary(X_val, Y_val, R_train,en_fr_test_pairs)  # this might take a minute or two
 print(f"accuracy on test set is {acc:.3f}")
+print(f"some wrong predictions included following pairs{wrong_preds[:5]}")

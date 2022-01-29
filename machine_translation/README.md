@@ -110,6 +110,20 @@ Where $\alpha$ is the learning rate, which is a scalar.
 
 #### Accuracy
 * The accuracy of the predictions is tested against french and corresponding english words translation on the test set. achieved accuracy is 55.7%
+* wrong predictions included the following words
+
+    (**English**)     [**Correct french word**]
+
+     [('chat',      'chat'), 
+
+    
+    ('herald', 'herald'),
+
+    ('chuck', 'chuck'),
+
+    ('pit', 'fosse'),
+
+    ('optional', 'facultatives')]
 
 #### Improvements to be done
 1. use fat Knn to speed up checks
