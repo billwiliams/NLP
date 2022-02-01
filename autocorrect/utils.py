@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-def get_vocab(file_name):
+def process_file(file_name):
     """get the vocabulary by reading a file
 
     Args:
