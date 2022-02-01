@@ -1,4 +1,5 @@
 import numpy as np
+import re
 
 def get_vocab(file_name):
     """get the vocabulary by reading a file
@@ -12,7 +13,8 @@ def get_vocab(file_name):
         lines=file.read()
         for line in lines:
             line_lower_case=line.lower()
-            for word in line_lower_case.split():
+            line_words=re.findall('\w+', line_lower_case)
+            for word in line_words.split():
                 vocab.append(word.lower())
     
     return vocab
