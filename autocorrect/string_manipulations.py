@@ -24,3 +24,27 @@ class StringManipulation:
         if verbose: print(f"input word {self.word}, \nsplit_l = {split_l}, \ndelete_l = {delete_l}")
 
         return  delete_l
+
+    def switch_letter(self, verbose=False):
+        '''
+    
+        Output:
+            switches: a list of all possible strings with one adjacent charater switched
+        ''' 
+        
+        switch_l = []
+        split_l = []
+        
+        ### START CODE HERE ###
+        split_l=[(self.word[:i],self.word[i:]) for i in range(len(self.word)+1)]
+        switch_l=list(set([L+R[:i] + R[i+1] + R[i] + R[i+2:]for (L,R) in split_l for i in range(len(R)-1) if R]))
+        
+        ### END CODE HERE ###
+        
+        if verbose: print(f"Input word = {self.word} \nsplit_l = {split_l} \nswitch_l = {switch_l}") 
+        
+        return switch_l
+
+SM=StringManipulation('ate')
+print(SM.delete_letter())
+print(SM.switch_letter())
