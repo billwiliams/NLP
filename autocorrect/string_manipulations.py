@@ -76,6 +76,27 @@ class StringManipulation:
         if verbose: print(f"Input word = {self.word} \nsplit_l = {split_l} \nreplace_l {replace_l}")   
         
         return replace_l
+    
+    def insert_letter(self, verbose=False):
+        '''
+        Output:
+            inserts: a set of all possible strings with one new letter inserted at every offset
+        ''' 
+        letters = 'abcdefghijklmnopqrstuvwxyz'
+        insert_l = []
+        split_l = []
+        
+        
+        split_l=[(self.word[:i],self.word[i:]) for i in range(len(self.word)+1)]
+        for i in range(len(self.word)+1):
+            for c in letters:
+                new_word=self.word[:i]+c+self.word[i:]
+                insert_l.append(new_word)
+            
+        
+        if verbose: print(f"Input word {self.word} \nsplit_l = {split_l} \ninsert_l = {insert_l}")
+        
+        return insert_l
 
 SM=StringManipulation('ate')
 print(SM.delete_letter())
