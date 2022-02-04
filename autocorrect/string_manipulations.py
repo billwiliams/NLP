@@ -124,7 +124,28 @@ class StringManipulation:
         # return as a set 
         return set(edit_one_set)
 
+    def edit_two_letters(self, allow_switches = True):
+        '''
+        Input:
+            word: the input string/word 
+        Output:
+            edit_two_set: a set of strings with all possible two edits
+        '''
+    
+        edit_two_set = set()
+        
+        
+        one_edit=self.edit_one_letter(self.word,allow_switches)
+        two_edits=[]
+        
+        for one_edit_word in one_edit:
+            two_edits=two_edits+(list(self.edit_one_letter(one_edit_word,allow_switches)))
+        edit_two_set=two_edits
+            
+        
+        # return  as a set 
+        return set(edit_two_set)
+
 SM=StringManipulation('ate')
-print(SM.delete_letter())
-print(SM.switch_letter())
-print(SM.replace_letter())
+print(SM.edit_two_letters())
+
