@@ -97,8 +97,8 @@ class StringManipulation:
         if verbose: print(f"Input word {self.word} \nsplit_l = {split_l} \ninsert_l = {insert_l}")
         
         return insert_l
-    
-    def edit_one_letter(self, allow_switches = True):
+    @staticmethod
+    def edit_one_letter(word, allow_switches = True):
         """
         Input:
             word: the string/word for which we will generate all possible wordsthat are one edit away.
@@ -107,12 +107,13 @@ class StringManipulation:
         """
         
         edit_one_set = set()
+        One_Str_manipulation=StringManipulation(word)
         
-        replace=self.replace_letter(self.word)
-        insert=self.insert_letter(self.word)
-        delete=self.delete_letter(self.word)
+        replace=One_Str_manipulation.replace_letter()
+        insert=One_Str_manipulation.insert_letter()
+        delete=One_Str_manipulation.delete_letter()
         if allow_switches:
-            switch=self.switch_letter(self.word)
+            switch=One_Str_manipulation.switch_letter()
         else:
             switch=[]
         all_ops=replace+insert+delete+switch
@@ -124,7 +125,8 @@ class StringManipulation:
         # return as a set 
         return set(edit_one_set)
 
-    def edit_two_letters(self, allow_switches = True):
+    @staticmethod
+    def edit_two_letters(word, allow_switches = True):
         '''
         Input:
             word: the input string/word 
@@ -135,17 +137,16 @@ class StringManipulation:
         edit_two_set = set()
         
         
-        one_edit=self.edit_one_letter(self.word,allow_switches)
+        one_edit=StringManipulation.edit_one_letter(word,allow_switches)
         two_edits=[]
         
         for one_edit_word in one_edit:
-            two_edits=two_edits+(list(self.edit_one_letter(one_edit_word,allow_switches)))
+            two_edits=two_edits+(list(StringManipulation.edit_one_letter(one_edit_word,allow_switches)))
         edit_two_set=two_edits
             
         
         # return  as a set 
         return set(edit_two_set)
 
-SM=StringManipulation('ate')
-print(SM.edit_two_letters())
+print(StringManipulation.edit_two_letters('ate'))
 
