@@ -97,6 +97,32 @@ class StringManipulation:
         if verbose: print(f"Input word {self.word} \nsplit_l = {split_l} \ninsert_l = {insert_l}")
         
         return insert_l
+    
+    def edit_one_letter(self, allow_switches = True):
+        """
+        Input:
+            word: the string/word for which we will generate all possible wordsthat are one edit away.
+        Output:
+            edit_one_set: a set of words with one possible edit. Please return a set. and not a list.
+        """
+        
+        edit_one_set = set()
+        
+        replace=self.replace_letter(self.word)
+        insert=self.insert_letter(self.word)
+        delete=self.delete_letter(self.word)
+        if allow_switches:
+            switch=self.switch_letter(self.word)
+        else:
+            switch=[]
+        all_ops=replace+insert+delete+switch
+        
+        edit_one_set=set(all_ops)
+        
+        
+        
+        # return as a set 
+        return set(edit_one_set)
 
 SM=StringManipulation('ate')
 print(SM.delete_letter())
