@@ -56,3 +56,14 @@ def get_corrections(word, probs, vocab, n=2, verbose = False):
     if verbose: print("entered word = ", word, "\nsuggestions = ", suggestions)
 
     return n_best
+
+
+vocab=process_file("../data/autocorrect/shakespeare.txt")
+word_count=get_count(vocab)
+probs=get_probabilities(word_count)
+word=input()
+
+n_best=get_corrections(word,probs,vocab)
+
+for i, word_prob in enumerate(n_best):
+    print(f"word {i}: {word_prob[0]}, probability {word_prob[1]:.6f}")
