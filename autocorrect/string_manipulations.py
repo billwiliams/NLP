@@ -148,5 +148,5 @@ class StringManipulation:
         # return  as a set 
         return set(edit_two_set)
 
-print(StringManipulation.edit_two_letters('ate'))
+
 

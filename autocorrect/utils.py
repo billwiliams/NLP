@@ -11,11 +11,13 @@ def process_file(file_name):
     vocab=[]
 
     with open(file_name,'r') as file:
-        lines=file.read()
-        for line in lines:
+
+        for line in file:
+    
             line_lower_case=line.lower()
-            line_words=re.findall('\w+', line_lower_case)
-            for word in line_words.split():
+            line_words=re.findall(r'\w+', line_lower_case)
+            
+            for word in line_words:
                 vocab.append(word.lower())
     
     return vocab
@@ -43,7 +45,7 @@ def get_probabilities(word_count):
         probs: A dictionary where keys are the words and the values are the probability that a word will occur. 
     """
     probs={}
-    total=sum(word_count.values)
+    total=sum(word_count.values())
 
     for word,value in word_count.items():
         probs[word]=value/total

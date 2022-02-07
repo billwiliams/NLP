@@ -1,5 +1,5 @@
 import numpy as np
-from .utils import get_count,process_file,get_probabilities
+from utils import get_count,process_file,get_probabilities
 from string_manipulations import StringManipulation
 
 
@@ -61,9 +61,10 @@ def get_corrections(word, probs, vocab, n=2, verbose = False):
 vocab=process_file("../data/autocorrect/shakespeare.txt")
 word_count=get_count(vocab)
 probs=get_probabilities(word_count)
-word=input()
+word=input("Enter a Word\n")
 
 n_best=get_corrections(word,probs,vocab)
 
+print("Suggestions are \n")
 for i, word_prob in enumerate(n_best):
-    print(f"word {i}: {word_prob[0]}, probability {word_prob[1]:.6f}")
+    print(f" word {i}: {word_prob[0]}, probability {word_prob[1]:.6f}")
