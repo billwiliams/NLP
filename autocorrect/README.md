@@ -42,3 +42,49 @@ $$P(c|w) = \frac{P(w|c)\times P(c)}{P(w)} \tag{Eqn-1}$$
 The equation above is [Bayes Rule](https://en.wikipedia.org/wiki/Bayes%27_theorem). 
 - Equation 1 says that the probability of a word being correct $P(c|w) $is equal to the probability of having a certain word $w$, given that it is correct $P(w|c)$, multiplied by the probability of being correct in general $P(C)$ divided by the probability of that word $w$ appearing $P(w)$ in general.
 
+<a name='1'></a>
+#  Data Preprocessing 
+
+<a name='ex-1'></a>
+### process data
+The function `process_data`  
+
+1) Reads in a corpus (text file)
+
+2) Changes everything to lowercase
+
+3) Returns a list of words. 
+
+<a name='ex-2'></a>
+### Get Count
+
+ `get_count` function  returns a dictionary
+- The dictionary's keys are words
+- The value for each word is the number of times that word appears in the corpus. 
+
+### get_probs
+Given the dictionary of word counts, `get_probs` function  computes the probability that each word will appear if randomly selected from the corpus of words.
+
+$$P(w_i) = \frac{C(w_i)}{M} \tag{Eqn-2}$$
+where 
+
+$C(w_i)$ is the total number of times $w_i$ appears in the corpus.
+
+$M$ is the total number of words in the corpus.
+
+<a name='2'></a>
+# String Manipulations
+
+The following functions  manipulate strings to allow editing of  the erroneous strings and returns the right spellings of the words. They are implemented in the file string_manipulations as methods of the class.
+
+
+* `delete_letter`: given a word, it returns all the possible strings that have **one character removed**. 
+* `switch_letter`: given a word, it returns all the possible strings that have **two adjacent letters switched**.
+* `replace_letter`: given a word, it returns all the possible strings that have **one character replaced by another different letter**.
+* `insert_letter`: given a word, it returns all the possible strings that have an **additional character inserted**. 
+
+<a name='3'></a>
+
+# Combining the edits
+
+ The function `edit_one_letter()`  return all the possible single edits that can be done on the string.
