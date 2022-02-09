@@ -88,3 +88,4 @@ The following functions  manipulate strings to allow editing of  the erroneous s
 # Combining the edits
 
  The function `edit_one_letter()`  return all the possible single edits that can be done on the string.
+ the `edit_two_letters` function  returns a set of words that are two edits away
