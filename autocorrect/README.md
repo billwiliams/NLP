@@ -89,3 +89,17 @@ The following functions  manipulate strings to allow editing of  the erroneous s
 
  The function `edit_one_letter()`  return all the possible single edits that can be done on the string.
  the `edit_two_letters` function  returns a set of words that are two edits away
+
+## suggesting spelling suggestions
+
+using  `edit_two_letters` function to get a set of all the possible 2 edits on input word. we then use those strings to get the most probable word  meant to type a.k.a your typing suggestion.
+
+<a name='ex-10'></a>
+ `get_corrections`,  returns a list of zero to n possible suggestion tuples of the form (word, probability_of_word). 
+
+ The 'suggestion algorithm'  follows this logic: 
+* If the word is in the vocabulary, suggest the word. 
+* Otherwise, if there are suggestions from `edit_one_letter` that are in the vocabulary, use those. 
+* Otherwise, if there are suggestions from `edit_two_letters` that are in the vocabulary, use those. 
+* Otherwise, suggest the input word.*  
+* The idea is that words generated from fewer edits are more likely than words with more edits.
