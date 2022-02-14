@@ -25,3 +25,6 @@ for i, word in enumerate(sorted(voc_l)):
 # load in the test corpus
 with open("./data/WSJ_24.pos", 'r') as f:
     y = f.readlines()
+
+#corpus without tags, preprocessed
+_, prep = preprocess(vocab, "./data/pos/test.words")   
