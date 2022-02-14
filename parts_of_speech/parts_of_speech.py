@@ -22,3 +22,6 @@ for i, word in enumerate(sorted(voc_l)):
     vocab[word] = i   
 
 
+# load in the test corpus
+with open("./data/WSJ_24.pos", 'r') as f:
+    y = f.readlines()
