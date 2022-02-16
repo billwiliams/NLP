@@ -81,3 +81,9 @@ def create_dictionaries(training_corpus, vocab, verbose=True):
         
         
     return emission_counts, transition_counts, tag_counts
+
+# get all the POS states
+states = sorted(tag_counts.keys())
+print(f"Number of POS tags (number of 'states'): {len(states)}")
+print("View these POS tags (states)")
+print(states)
