@@ -38,3 +38,15 @@ A POS tagger will necessarily encounter words that are not in its datasets.
 
 <img src = "images/pos.png" style="width:400px;height:250px;"/>
 . 
+
+#### Transition counts
+- The first dictionary is the `transition_counts` dictionary which computes the number of times each tag happened next to another tag. 
+
+This dictionary will is used to compute: 
+$$P(t_i |t_{i-1}) \tag{1}$$
+
+This is the probability of a tag at position $i$ given the tag at position $i-1$.
+
+In order to compute equation 1, we create a `transition_counts` dictionary where 
+- The keys are `(prev_tag, tag)`
+- The values are the number of times those two tags appeared in that order. 
