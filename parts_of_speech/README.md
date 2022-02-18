@@ -50,3 +50,15 @@ This is the probability of a tag at position $i$ given the tag at position $i-1$
 In order to compute equation 1, we create a `transition_counts` dictionary where 
 - The keys are `(prev_tag, tag)`
 - The values are the number of times those two tags appeared in that order. 
+
+#### Emission counts
+
+The second dictionary we compute is the `emission_counts` dictionary. This dictionary is used to compute:
+
+$$P(w_i|t_i)\tag{2}$$
+
+we use it to compute the probability of a word given its tag. 
+
+In order  to compute equation 2, we  will create an `emission_counts` dictionary where 
+- The keys are `(tag, word)` 
+- The values are the number of times that pair showed up in the  training set. 
