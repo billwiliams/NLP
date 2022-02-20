@@ -62,3 +62,9 @@ we use it to compute the probability of a word given its tag.
 In order  to compute equation 2, we  will create an `emission_counts` dictionary where 
 - The keys are `(tag, word)` 
 - The values are the number of times that pair showed up in the  training set. 
+
+#### Tag counts
+
+The last dictionary we compute is the `tag_counts` dictionary. 
+- The key is the tag 
+- The value is the number of times each tag appeared.
