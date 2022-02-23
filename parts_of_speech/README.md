@@ -86,3 +86,9 @@ We start by initializing two matrices of the same dimension.
 - best_probs: Each cell contains the probability of going from one POS tag to a word in the corpus.
 
 - best_paths: A matrix that helps you trace through the best possible path in the corpus. 
+
+We initializes the `best_probs` and the `best_paths` matrix. 
+
+Both matrices will be initialized to zero except for column zero of `best_probs`.  
+- Column zero of `best_probs` is initialized with the assumption that the first word of the corpus was preceded by a start token ("--s--"). 
+- This allows you to reference the **A** matrix for the transition probability
