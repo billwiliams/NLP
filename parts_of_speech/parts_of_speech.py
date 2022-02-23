@@ -406,3 +406,7 @@ def viterbi_backward(best_probs, best_paths, corpus, states):
 # Run and test viterbi function
 pred = viterbi_backward(best_probs, best_paths, prep, states)
 m=len(pred)
+
+print('The third word is:', prep[3])
+print('Your prediction is:', pred[3])
+print('Your corresponding label y is: ', y[3])
