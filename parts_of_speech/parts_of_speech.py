@@ -402,3 +402,7 @@ def viterbi_backward(best_probs, best_paths, corpus, states):
         
     
     return pred
+
+# Run and test viterbi function
+pred = viterbi_backward(best_probs, best_paths, prep, states)
+m=len(pred)
