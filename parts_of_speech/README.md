@@ -68,3 +68,21 @@ In order  to compute equation 2, we  will create an `emission_counts` dictionary
 The last dictionary we compute is the `tag_counts` dictionary. 
 - The key is the tag 
 - The value is the number of times each tag appeared.
+
+<a name='3'></a>
+# Part 3: Viterbi Algorithm and Dynamic Programming
+
+We implement the Viterbi algorithm which makes use of dynamic programming. Specifically, We use the two matrices, `A` and `B` to compute the Viterbi algorithm.  
+
+* **Initialization** - In this part we initialize the `best_paths` and `best_probabilities` matrices that we will be populating in `feed_forward`.
+* **Feed forward** - At each step, we calculate the probability of each path happening and the best paths up to that point. 
+* **Feed backward**: This allows us to find the best path with the highest probabilities. 
+
+<a name='3.1'></a>
+## Part 3.1:  Initialization 
+
+We start by initializing two matrices of the same dimension. 
+
+- best_probs: Each cell contains the probability of going from one POS tag to a word in the corpus.
+
+- best_paths: A matrix that helps you trace through the best possible path in the corpus. 
