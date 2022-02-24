@@ -91,4 +91,17 @@ We initializes the `best_probs` and the `best_paths` matrix.
 
 Both matrices will be initialized to zero except for column zero of `best_probs`.  
 - Column zero of `best_probs` is initialized with the assumption that the first word of the corpus was preceded by a start token ("--s--"). 
-- This allows you to reference the **A** matrix for the transition probability
+- This allows us to reference the **A** matrix for the transition probability
+
+vocab[corpus[0]] refers to the first word of the corpus (the word at position 0 of the corpus). 
+-**vocab** is a dictionary that returns the unique integer that refers to that particular word.
+
+Conceptually, it looks like this:
+$\textrm{best_probs}[s_{idx}, i] = \mathbf{A}[s_{idx}, i] \times \mathbf{B}[i, corpus[0] ]$
+
+
+In order to avoid multiplying and storing small values on the computer, we'll take the log of the product, which becomes the sum of two logs:
+
+$best\_probs[i,0] = log(A[s_{idx}, i]) + log(B[i, vocab[corpus[0]]$
+
+Also, to avoid taking the log of 0 (which is defined as negative infinity), the code itself will just set $best\_probs[i,0] = float('-inf')$ when $A[s_{idx}, i] == 0$
