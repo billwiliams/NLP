@@ -105,3 +105,9 @@ In order to avoid multiplying and storing small values on the computer, we'll ta
 $best\_probs[i,0] = log(A[s_{idx}, i]) + log(B[i, vocab[corpus[0]]$
 
 Also, to avoid taking the log of 0 (which is defined as negative infinity), the code itself will just set $best\_probs[i,0] = float('-inf')$ when $A[s_{idx}, i] == 0$
+
+the implementation to initialize $best\_probs$ is as follows:
+
+$ \textrm{if}\ A[s_{idx}, i] <> 0 : best\_probs[i,0] = log(A[s_{idx}, i]) + log(B[i, vocab[corpus[0]]])$
+
+$ \textrm{if}\ A[s_{idx}, i] == 0 : best\_probs[i,0] = float('-inf')$
