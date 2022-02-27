@@ -111,3 +111,11 @@ the implementation to initialize $best\_probs$ is as follows:
 $ \textrm{if}\ A[s_{idx}, i] <> 0 : best\_probs[i,0] = log(A[s_{idx}, i]) + log(B[i, vocab[corpus[0]]])$
 
 $ \textrm{if}\ A[s_{idx}, i] == 0 : best\_probs[i,0] = float('-inf')$
+
+## Viterbi Forward
+
+We implement  the `viterbi_forward` by  populating  `best_probs` and `best_paths` matrices.
+- Walk forward through the corpus.
+- For each word, compute a probability for each possible tag.
+
+this  includes the path up to that (word,tag) combination. 
