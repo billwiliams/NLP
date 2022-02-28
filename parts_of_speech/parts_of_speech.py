@@ -60,7 +60,7 @@ def create_dictionaries(training_corpus, vocab, verbose=True):
         
         # Every 50,000 words, print the word count
         if i % 50000 == 0 and verbose:
-            print(f"word count = {i}")
+            print('word count = {i}')
             
         
         # get the word and tag using the get_word_tag helper function (imported from utils_pos.py)
@@ -84,7 +84,7 @@ def create_dictionaries(training_corpus, vocab, verbose=True):
 
 # get all the POS states
 states = sorted(tag_counts.keys())
-print(f"Number of POS tags (number of 'states'): {len(states)}")
+print("Number of POS tags (number of 'states'): {len(states)}")
 print("View these POS tags (states)")
 print(states)
 
