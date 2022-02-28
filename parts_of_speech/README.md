@@ -119,3 +119,26 @@ We implement  the `viterbi_forward` by  populating  `best_probs` and `best_paths
 - For each word, compute a probability for each possible tag.
 
 this  includes the path up to that (word,tag) combination. 
+
+##  Viterbi backward
+
+- The Viterbi backward algorithm gets the predictions of the POS tags for each word in the corpus using the `best_paths` and the `best_probs` matrices.
+
+example as below
+
+POS tag for 'upward' is `RB`
+- Select the the most likely POS tag for the last word in the corpus, 'upward' in the `best_prob` table.
+- Look for the row in the column for 'upward' that has the largest probability.
+- Notice that in row 28 of `best_probs`, the estimated probability is -34.99, which is larger than the other values in the column.  So the most likely POS tag for 'upward' is `RB` an adverb, at row 28 of `best_prob`. 
+- The variable `z` is an array that stores the unique integer ID of the predicted POS tags for each word in the corpus.  In array z, at position 2, store the value 28 to indicate that the word 'upward' (at index 2 in the corpus), most likely has the POS tag associated with unique ID 28 (which is `RB`).
+- The variable `pred` contains the POS tags in string form.  So `pred` at index 2 stores the string `RB`.
+
+
+POS tag for 'tracks' is `VBZ`
+- The next step is to go backward one word in the corpus ('tracks').  Since the most likely POS tag for 'upward' is `RB`, which is uniquely identified by integer ID 28, go to the `best_paths` matrix in column 2, row 28.  The value stored in `best_paths`, column 2, row 28 indicates the unique ID of the POS tag of the previous word.  In this case, the value stored here is 40, which is the unique ID for POS tag `VBZ` (verb, 3rd person singular present).
+- So the previous word at index 1 of the corpus ('tracks'), most likely has the POS tag with unique ID 40, which is `VBZ`.
+- In array `z`, store the value 40 at position 1, and for array `pred`, store the string `VBZ` to indicate that the word 'tracks' most likely has POS tag `VBZ`.
+
+POS tag for 'Loss' is `NN`
+- In `best_paths` at column 1, the unique ID stored at row 40 is 20.  20 is the unique ID for POS tag `NN`.
+- In array `z` at position 0, store 20.  In array `pred` at position 0, store `NN`.
