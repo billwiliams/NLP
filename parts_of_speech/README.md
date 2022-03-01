@@ -142,3 +142,8 @@ POS tag for 'tracks' is `VBZ`
 POS tag for 'Loss' is `NN`
 - In `best_paths` at column 1, the unique ID stored at row 40 is 20.  20 is the unique ID for POS tag `NN`.
 - In array `z` at position 0, store 20.  In array `pred` at position 0, store `NN`.
+# Predicting on a data set
+
+We compute the accuracy of the prediction by comparing it with the true `y` labels. 
+- `pred` is a list of predicted POS tags corresponding to the words of the `test_corpus`. 
+ 
