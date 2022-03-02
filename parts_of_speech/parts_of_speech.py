@@ -11,7 +11,7 @@ with open("../data/pos/WSJ_02-21.pos") as f:
     training_corpus=f.readlines()
 
 # read the vocabulary data, split by each line of text, and save the list
-with open("../data/hmm_vocab.txt", 'r') as f:
+with open("../data/pos/hmm_vocab.txt", 'r') as f:
     voc_l = f.read().split('\n')
 
 # vocab: dictionary that has the index of the corresponding words
@@ -60,7 +60,7 @@ def create_dictionaries(training_corpus, vocab, verbose=True):
         
         # Every 50,000 words, print the word count
         if i % 50000 == 0 and verbose:
-            print('word count = {i}')
+            print(f'word count = {i}')
             
         
         # get the word and tag using the get_word_tag helper function (imported from utils_pos.py)
@@ -82,14 +82,15 @@ def create_dictionaries(training_corpus, vocab, verbose=True):
         
     return emission_counts, transition_counts, tag_counts
 
-# get all the POS states
-states = sorted(tag_counts.keys())
-print("Number of POS tags (number of 'states'): {len(states)}")
-print("View these POS tags (states)")
-print(states)
+
 
 emission_counts, transition_counts, tag_counts = create_dictionaries(training_corpus, vocab)
 
+# get all the POS states
+states = sorted(tag_counts.keys())
+print(f"Number of POS tags (number of 'states'): {len(states)}")
+print("View these POS tags (states)")
+print(states)
 
 def create_transition_matrix(alpha, tag_counts, transition_counts):
     ''' 
@@ -449,3 +450,6 @@ def compute_accuracy(pred, y):
 
         
     return num_correct/total
+
+
+print(f"Accuracy of the Viterbi algorithm is {compute_accuracy(pred, y):.4f}")

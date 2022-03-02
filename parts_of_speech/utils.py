@@ -1,3 +1,14 @@
+
+import string 
+# Punctuation characters
+punct = set(string.punctuation)
+# Morphology rules used to assign unknown word tokens
+noun_suffix = ["action", "age", "ance", "cy", "dom", "ee", "ence", "er", "hood", "ion", "ism", "ist", "ity", "ling", "ment", "ness", "or", "ry", "scape", "ship", "ty"]
+verb_suffix = ["ate", "ify", "ise", "ize"]
+adj_suffix = ["able", "ese", "ful", "i", "ian", "ible", "ic", "ish", "ive", "less", "ly", "ous"]
+adv_suffix = ["ward", "wards", "wise"]
+
+
 def preprocess(vocab, data_fp):
     """
     Preprocess data
