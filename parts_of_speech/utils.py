@@ -32,3 +32,16 @@ def preprocess(vocab, data_fp):
     assert(len(prep) == len(open(data_fp, "r").readlines()))
 
     return orig, prep
+
+def get_word_tag(line, vocab): 
+    if not line.split():
+        word = "--n--"
+        tag = "--s--"
+        return word, tag
+    else:
+        word, tag = line.split()
+        if word not in vocab: 
+            # Handle unknown words
+            word = assign_unk(word)
+        return word, tag
+    return None 
