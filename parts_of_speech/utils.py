@@ -33,6 +33,40 @@ def preprocess(vocab, data_fp):
 
     return orig, prep
 
+def assign_unk(tok):
+    """
+    Assign unknown word tokens
+    """
+    # Digits
+    if any(char.isdigit() for char in tok):
+        return "--unk_digit--"
+
+    # Punctuation
+    elif any(char in punct for char in tok):
+        return "--unk_punct--"
+
+    # Upper-case
+    elif any(char.isupper() for char in tok):
+        return "--unk_upper--"
+
+    # Nouns
+    elif any(tok.endswith(suffix) for suffix in noun_suffix):
+        return "--unk_noun--"
+
+    # Verbs
+    elif any(tok.endswith(suffix) for suffix in verb_suffix):
+        return "--unk_verb--"
+
+    # Adjectives
+    elif any(tok.endswith(suffix) for suffix in adj_suffix):
+        return "--unk_adj--"
+
+    # Adverbs
+    elif any(tok.endswith(suffix) for suffix in adv_suffix):
+        return "--unk_adv--"
+
+    return "--unk--"
+
 def get_word_tag(line, vocab): 
     if not line.split():
         word = "--n--"
