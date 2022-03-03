@@ -12,3 +12,5 @@ Github doesn't render the formulas using mathjax hence not visible in github
 
 #### 4. [Machine Translation](https://github.com/billwiliams/NLP/tree/main/machine_translation)Implementation of  English to French words transaltion using word embeddings and vector space models.
 
+#### 4. [Parts of Speech](https://github.com/billwiliams/NLP/tree/main/parts_of_speech) Implementation of  assigning a part-of-speech tag (Noun, Verb, Adjective...) to each word in an input text.
+
