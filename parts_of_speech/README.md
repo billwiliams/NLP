@@ -2,7 +2,7 @@
 
 Implements the process of assigning a part-of-speech tag (Noun, Verb, Adjective...) to each word in an input text.
 
-a name='0'></a>
+
 ##  Data Sources
 We use two tagged data sets collected from the **Wall Street Journal (WSJ)**. 
 
@@ -28,7 +28,7 @@ A POS tagger will necessarily encounter words that are not in its datasets.
 
 
 
-<a name='1.1'></a>
+
 ##  Training
 
  Finding  the words that are not ambiguous. 
@@ -36,8 +36,7 @@ A POS tagger will necessarily encounter words that are not in its datasets.
 - In the `WSJ` corpus, $86$% of the token are unambiguous (meaning they have only one tag) 
 - About $14\%$ are ambiguous (meaning that they have more than one tag)
 
-<img src = "images/pos.png" style="width:400px;height:250px;"/>
-. 
+ 
 
 #### Transition counts
 - The first dictionary is the `transition_counts` dictionary which computes the number of times each tag happened next to another tag. 
@@ -78,8 +77,8 @@ We implement the Viterbi algorithm which makes use of dynamic programming. Speci
 * **Feed forward** - At each step, we calculate the probability of each path happening and the best paths up to that point. 
 * **Feed backward**: This allows us to find the best path with the highest probabilities. 
 
-<a name='3.1'></a>
-## Part 3.1:  Initialization 
+
+## Part Initialization 
 
 We start by initializing two matrices of the same dimension. 
 
