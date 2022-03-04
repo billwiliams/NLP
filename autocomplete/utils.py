@@ -68,3 +68,25 @@ def tokenize_sentences(sentences):
     
     
     return tokenized_sentences
+
+
+def get_tokenized_data(data):
+    """
+    Make a list of tokenized sentences
+    
+    Args:
+        data: String
+    
+    Returns:
+        List of lists of tokens
+    """
+    
+    
+    # Get the sentences by splitting up the data
+    sentences = split_to_sentences(data)
+    
+    # Get the list of lists of tokens by tokenizing the sentences
+    tokenized_sentences = tokenize_sentences(sentences)
+    
+    
+    return tokenized_sentences
