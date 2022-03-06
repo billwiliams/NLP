@@ -158,3 +158,47 @@ def get_words_with_nplus_frequency(tokenized_sentences, count_threshold):
     
     
     return closed_vocab
+
+def replace_oov_words_by_unk(tokenized_sentences, vocabulary, unknown_token="<unk>"):
+    """
+    Replace words not in the given vocabulary with '<unk>' token.
+    
+    Args:
+        tokenized_sentences: List of lists of strings
+        vocabulary: List of strings that we will use
+        unknown_token: A string representing unknown (out-of-vocabulary) words
+    
+    Returns:
+        List of lists of strings, with words not in the vocabulary replaced
+    """
+    
+    # Place vocabulary into a set for faster search
+    vocabulary = set(vocabulary)
+    
+    # Initialize a list that will hold the sentences
+    # after less frequent words are replaced by the unknown token
+    replaced_tokenized_sentences = []
+    
+    # Go through each sentence
+    for sentence in tokenized_sentences:
+        
+        # Initialize the list that will contain
+        # a single sentence with "unknown_token" replacements
+        replaced_sentence = []
+        
+
+        # for each token in the sentence
+        for token in sentence: 
+            
+            # Check if the token is in the closed vocabulary
+            if token in vocabulary: 
+                # If so, append the word to the replaced_sentence
+                replaced_sentence.append(token)
+            else:
+                # otherwise, append the unknown token instead
+                replaced_sentence.append(unknown_token)
+        
+        
+        # Append the list of tokens to the list of lists
+        replaced_tokenized_sentences.append(replaced_sentence)
+    return replaced_tokenized_sentences
