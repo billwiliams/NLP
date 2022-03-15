@@ -188,3 +188,131 @@ def make_count_matrix(n_plus1_gram_counts, vocabulary):
     count_matrix = pd.DataFrame(count_matrix, index=n_grams, columns=vocabulary)
     return count_matrix
 
+def calculate_perplexity(sentence, n_gram_counts, n_plus1_gram_counts, vocabulary_size, start_token='<s>', end_token = '<e>', k=1.0):
+    """
+    Calculate perplexity for a list of sentences
+    
+    Args:
+        sentence: List of strings
+        n_gram_counts: Dictionary of counts of n-grams
+        n_plus1_gram_counts: Dictionary of counts of (n+1)-grams
+        vocabulary_size: number of unique words in the vocabulary
+        k: Positive smoothing constant
+    
+    Returns:
+        Perplexity score
+    """
+    # length of previous words
+    n = len(list(n_gram_counts.keys())[0]) 
+    
+    # prepend <s> and append <e>
+    sentence = [start_token] * n + sentence + [end_token]
+    
+    # Cast the sentence from a list to a tuple
+    sentence = tuple(sentence)
+    
+    # length of sentence (after adding <s> and <e> tokens)
+    N = len(sentence)
+    
+    # The variable p will hold the product
+    # that is calculated inside the n-root
+    # Update this in the code below
+    product_pi = 1.0
+    
+    
+    
+    for t in range(n, N):
+
+        # get the n-gram preceding the word at position t
+        n_gram = sentence[t-n:t]
+        
+        
+        # get the word at position t
+        word = sentence[t]
+        
+        # Estimate the probability of the word given the n-gram
+        # using the n-gram counts, n-plus1-gram counts,
+        # vocabulary size, and smoothing constant
+        probability =  estimate_probability(word, n_gram, 
+                         n_gram_counts, n_plus1_gram_counts, vocabulary_size, k)
+        # Update the product of the probabilities
+        # This 'product_pi' is a cumulative product 
+        # of the (1/P) factors that are calculated in the loop
+        product_pi *= 1/probability
+        
+
+    # Take the Nth root of the product
+    perplexity = (product_pi)**(1/N)
+    
+   
+    return perplexity
+
+
+def suggest_a_word(previous_tokens, n_gram_counts, n_plus1_gram_counts, vocabulary, end_token='<e>', unknown_token="<unk>", k=1.0, start_with=None):
+    """
+    Get suggestion for the next word
+    
+    Args:
+        previous_tokens: The sentence you input where each token is a word. Must have length > n 
+        n_gram_counts: Dictionary of counts of n-grams
+        n_plus1_gram_counts: Dictionary of counts of (n+1)-grams
+        vocabulary: List of words
+        k: positive constant, smoothing parameter
+        start_with: If not None, specifies the first few letters of the next word
+        
+    Returns:
+        A tuple of 
+          - string of the most likely next word
+          - corresponding probability
+    """
+    
+    # length of previous words
+    n = len(list(n_gram_counts.keys())[0]) 
+    
+    # From the words that the user already typed
+    # get the most recent 'n' words as the previous n-gram
+    previous_n_gram = previous_tokens[-n:]
+
+    # Estimate the probabilities that each word in the vocabulary
+    # is the next word,
+    # given the previous n-gram, the dictionary of n-gram counts,
+    # the dictionary of n plus 1 gram counts, and the smoothing constant
+    probabilities = estimate_probabilities(previous_n_gram,
+                                           n_gram_counts, n_plus1_gram_counts,
+                                           vocabulary, k=k)
+    
+    # Initialize suggested word to None
+    # This will be set to the word with highest probability
+    suggestion = None
+    
+    # Initialize the highest word probability to 0
+    # this will be set to the highest probability 
+    # of all words to be suggested
+    max_prob = 0
+    
+   
+    
+    # For each word and its probability in the probabilities dictionary:
+    for word, prob in probabilities.items(): # complete this line
+        
+        # If the optional start_with string is set
+        if start_with: 
+            # Check if the beginning of word does not match with the letters in 'start_with'
+            if not word.startswith(start_with) : 
+
+                # if they don't match, skip this word (move onto the next word)
+                continue
+        
+        # Check if this word's probability
+        # is greater than the current maximum probability
+        if prob>max_prob: 
+            
+            # If so, save this word as the best suggestion (so far)
+            suggestion = word
+            
+            # Save the new maximum probability
+            max_prob = prob
+
+   
+    
+    return suggestion, max_prob
