@@ -32,3 +32,17 @@ Here are the steps of taken:
     - Estimate the conditional probability of a next word with k-smoothing.
 1. Evaluate the N-gram models by computing the perplexity score.
 1. Use  model to suggest an upcoming word given your sentence. 
+
+### Pre-process the data
+
+Preprocessing data with the following steps:
+
+1. Spliting data into sentences using "\n" as the delimiter.
+1. Spliting each sentence into tokens. 
+1. Assigning sentences into train or test sets.
+1. Finding  tokens that appear at least N times in the training data.
+1. Replacing  tokens that appear less than N times by `<unk>`
+
+
+
+
