@@ -43,6 +43,14 @@ Preprocessing data with the following steps:
 1. Finding  tokens that appear at least N times in the training data.
 1. Replacing  tokens that appear less than N times by `<unk>`
 
+### Handling 'Out of Vocabulary' words
+
+If the model is performing autocomplete, but encounters a word that it never saw during training, it won't have an input word to help it determine the next word to suggest. The model will not be able to predict the next word because there are no counts for the current word. 
+- This 'new' word is called an 'unknown word', or <b>out of vocabulary (OOV)</b> words.
+- The percentage of unknown words in the test set is called the <b> OOV </b> rate. 
+
+To handle unknown words during prediction, we use a special token to represent all unknown words 'unk'. 
+-
 
 
 
