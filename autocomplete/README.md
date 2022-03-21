@@ -50,7 +50,33 @@ If the model is performing autocomplete, but encounters a word that it never saw
 - The percentage of unknown words in the test set is called the <b> OOV </b> rate. 
 
 To handle unknown words during prediction, we use a special token to represent all unknown words 'unk'. 
--
+
+##  Developing n-gram based language models
+
+We  develop the n-grams language model.
+- Assuming the probability of the next word depends only on the previous n-gram.
+- The previous n-gram is the series of the previous 'n' words.
+
+The conditional probability for the word at position 't' in the sentence, given that the words preceding it are $w_{t-n}\cdots w_{t-2}, w_{t-1}$ is:
+
+$$ P(w_t | w_{t-n}\dots w_{t-1} ) \tag{1}$$
+
+We can estimate this probability  by counting the occurrences of these series of words in the training data.
+- The probability can be estimated as a ratio, where
+- The numerator is the number of times word 't' appears after words t-n through t-1 appear in the training data.
+- The denominator is the number of times word t-n through t-1 appears in the training data.
+
+
+$$ \hat{P}(w_t | w_{t-n} \dots w_{t-1}) = \frac{C(w_{t-n}\dots w_{t-1}, w_t)}{C(w_{t-n}\dots w_{t-1})} \tag{2} $$
+
+
+- The function $C(\cdots)$ denotes the number of occurence of the given sequence. 
+- $\hat{P}$ means the estimation of $P$. 
+- Notice that denominator of the equation (2) is the number of occurence of the previous $n$ words, and the numerator is the same sequence followed by the word $w_t$.
+
+Later, we can modify the equation (2) by adding k-smoothing, which avoids errors when any counts are zero.
+
+The equation (2) tells us that to estimate probabilities based on n-grams, you need the counts of n-grams (for denominator) and (n+1)-grams (for numerator).
 
 
 
