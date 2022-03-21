@@ -7,7 +7,7 @@ nltk.download('punkt')
 
 nltk.data.path.append('../data/')
 
-from .utils import preprocess_data,load_data,get_tokenized_data
+from utils import preprocess_data,load_data,get_tokenized_data
 
 data=load_data()
 
@@ -329,3 +329,13 @@ def get_suggestions(previous_tokens, n_gram_counts_list, vocabulary, k=1.0, star
                                     k=k, start_with=start_with)
         suggestions.append(suggestion)
     return suggestions
+
+
+sentences = [['i', 'like', 'a', 'cat'],
+             ['this', 'dog', 'is', 'like', 'a', 'cat']]
+unique_words = list(set(sentences[0] + sentences[1]))
+unigram_counts = count_n_grams(sentences, 1)
+bigram_counts = count_n_grams(sentences, 2)
+tmp_prob = estimate_probability("cat", "a", unigram_counts, bigram_counts, len(unique_words), k=1)
+
+print(f"The estimated probability of word 'cat' given the previous n-gram 'a' is: {tmp_prob:.4f}")

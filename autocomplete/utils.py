@@ -1,5 +1,9 @@
+import nltk
+nltk.download('punkt')
 
-def load_data(file_name="./data/en_US.twitter.txt"):
+nltk.data.path.append('../data/')
+
+def load_data(file_name="../data/autocomplete/en_US.twitter.txt"):
     with open(file_name, "r") as f:
         data = f.read()
     print("Data type:", type(data))
