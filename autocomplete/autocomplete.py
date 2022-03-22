@@ -188,6 +188,12 @@ def make_count_matrix(n_plus1_gram_counts, vocabulary):
     count_matrix = pd.DataFrame(count_matrix, index=n_grams, columns=vocabulary)
     return count_matrix
 
+def make_probability_matrix(n_plus1_gram_counts, vocabulary, k):
+    count_matrix = make_count_matrix(n_plus1_gram_counts, unique_words)
+    count_matrix += k
+    prob_matrix = count_matrix.div(count_matrix.sum(axis=1), axis=0)
+    return prob_matrix
+
 def calculate_perplexity(sentence, n_gram_counts, n_plus1_gram_counts, vocabulary_size, start_token='<s>', end_token = '<e>', k=1.0):
     """
     Calculate perplexity for a list of sentences
@@ -339,3 +345,21 @@ bigram_counts = count_n_grams(sentences, 2)
 tmp_prob = estimate_probability("cat", "a", unigram_counts, bigram_counts, len(unique_words), k=1)
 
 print(f"The estimated probability of word 'cat' given the previous n-gram 'a' is: {tmp_prob:.4f}")
+
+
+sentences = [['i', 'like', 'a', 'cat'],
+             ['this', 'dog', 'is', 'like', 'a', 'cat']]
+unique_words = list(set(sentences[0] + sentences[1]))
+
+unigram_counts = count_n_grams(sentences, 1)
+bigram_counts = count_n_grams(sentences, 2)
+
+previous_tokens = ["i", "like"]
+tmp_suggest1 = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0)
+print(f"The previous words are 'i like',\n\tand the suggested word is `{tmp_suggest1[0]}` with a probability of {tmp_suggest1[1]:.4f}")
+
+print()
+# test your code when setting the starts_with
+tmp_starts_with = 'c'
+tmp_suggest2 = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, unique_words, k=1.0, start_with=tmp_starts_with)
+print(f"The previous words are 'i like', the suggestion must start with `{tmp_starts_with}`\n\tand the suggested word is `{tmp_suggest2[0]}` with a probability of {tmp_suggest2[1]:.4f}")
