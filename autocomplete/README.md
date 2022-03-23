@@ -79,4 +79,25 @@ Later, we can modify the equation (2) by adding k-smoothing, which avoids errors
 The equation (2) tells us that to estimate probabilities based on n-grams, you need the counts of n-grams (for denominator) and (n+1)-grams (for numerator).
 
 
+## Part 3: Perplexity
+
+We generate the perplexity score to evaluate the model on the test set. 
+- We also use back-off when needed. 
+- Perplexity is used as an evaluation metric of the language model. 
+- To calculate the perplexity score of the test set on an n-gram model, use: 
+
+$$ PP(W) =\sqrt[N]{ \prod_{t=n+1}^N \frac{1}{P(w_t | w_{t-n} \cdots w_{t-1})} } \tag{4}$$
+
+- where $N$ is the length of the sentence.
+- $n$ is the number of words in the n-gram (e.g. 2 for a bigram).
+- In math, the numbering starts at one and not zero.
+
+In code, array indexing starts at zero, so the code will use ranges for $t$ according to this formula:
+
+$$ PP(W) =\sqrt[N]{ \prod_{t=n}^{N-1} \frac{1}{P(w_t | w_{t-n} \cdots w_{t-1})} } \tag{4.1}$$
+
+The higher the probabilities are, the lower the perplexity will be. 
+- The more the n-grams tell us about the sentence, the lower the perplexity score will be. 
+
+
 
