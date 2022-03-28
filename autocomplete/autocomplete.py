@@ -365,8 +365,8 @@ tmp_suggest2 = suggest_a_word(previous_tokens, unigram_counts, bigram_counts, un
 print(f"The previous words are 'i like', the suggestion must start with `{tmp_starts_with}`\n\tand the suggested word is `{tmp_suggest2[0]}` with a probability of {tmp_suggest2[1]:.4f}")
 
 sentence_in=input("enter a sentence")
-sentence_in=[word for word in sentence_in]
-sentence_in_previous_tokens=list(sentence_in)[:-2:]
+sentence_in=[[word for word in sentence_in],['new','sentence']]
+sentence_in_previous_tokens=list(sentence_in)[0][:-2:]
 
 unigram_counts = count_n_grams(sentence_in, 1)
 bigram_counts = count_n_grams(sentence_in, 2)
