@@ -79,7 +79,7 @@ Later, we can modify the equation (2) by adding k-smoothing, which avoids errors
 The equation (2) tells us that to estimate probabilities based on n-grams, you need the counts of n-grams (for denominator) and (n+1)-grams (for numerator).
 
 
-## Part 3: Perplexity
+##  Perplexity
 
 We generate the perplexity score to evaluate the model on the test set. 
 - We also use back-off when needed. 
@@ -99,5 +99,9 @@ $$ PP(W) =\sqrt[N]{ \prod_{t=n}^{N-1} \frac{1}{P(w_t | w_{t-n} \cdots w_{t-1})} 
 The higher the probabilities are, the lower the perplexity will be. 
 - The more the n-grams tell us about the sentence, the lower the perplexity score will be. 
 
+
+### Suggesting multiple words using n-grams of varying length
+
+we suggest multiple words using n-grams of varying lengths (unigrams, bigrams, trigrams, 4-grams...6-grams).
 
 
