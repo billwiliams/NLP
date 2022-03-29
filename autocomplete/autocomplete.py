@@ -372,7 +372,7 @@ for n in range(1, 6):
     print("Computing n-gram counts with n =", n, "...")
     n_model_counts = count_n_grams(train_data_processed, n)
     n_gram_counts_list.append(n_model_counts)
-tmp_suggest4 = get_suggestions(sentence_in, n_gram_counts_list, vocabulary, k=3.0)
+tmp_suggest4 = get_suggestions(sentence_in, n_gram_counts_list, vocabulary, k=0.6)
 
 print(f"The previous words are {sentence_in}, the suggestions are:")
 print(tmp_suggest4)
