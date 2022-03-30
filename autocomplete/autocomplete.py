@@ -376,3 +376,9 @@ tmp_suggest4 = get_suggestions(sentence_in, n_gram_counts_list, vocabulary, k=0.
 
 print(f"The previous words are {sentence_in}, the suggestions are:")
 print(tmp_suggest4)
+
+previous_tokens = ["hey", "how", "are", "you"]
+tmp_suggest8 = get_suggestions(previous_tokens, n_gram_counts_list, vocabulary, k=1.0, start_with="d")
+
+print(f"The previous words are {previous_tokens}, the suggestions are:")
+print(tmp_suggest8)
