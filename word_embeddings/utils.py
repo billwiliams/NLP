@@ -25,3 +25,20 @@ def pack_idx_with_frequency(context_words, word2Ind):
         freq = freq_dict[context_words[i]]
         packed.append((idx, freq))
     return packed
+
+def get_vectors(data, word2Ind, V, C):
+    i = C
+    while True:
+        y = np.zeros(V)
+        x = np.zeros(V)
+        center_word = data[i]
+        y[word2Ind[center_word]] = 1
+        context_words = data[(i - C) : i] + data[(i + 1) : (i + C + 1)]
+        num_ctx_words = len(context_words)
+        for idx, freq in pack_idx_with_frequency(context_words, word2Ind):
+            x[idx] = freq / num_ctx_words
+        yield x, y
+        i += 1
+        if i >= len(data):
+            print("i is being set to 0")
+            i = 0
