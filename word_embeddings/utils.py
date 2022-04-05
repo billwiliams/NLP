@@ -42,3 +42,15 @@ def get_vectors(data, word2Ind, V, C):
         if i >= len(data):
             print("i is being set to 0")
             i = 0
+def get_batches(data, word2Ind, V, C, batch_size):
+    batch_x = []
+    batch_y = []
+    for x, y in get_vectors(data, word2Ind, V, C):
+        while len(batch_x) < batch_size:
+            batch_x.append(x)
+            batch_y.append(y)
+        else:
+            yield np.array(batch_x).T, np.array(batch_y).T
+            batch_x = []
+            batch_y = []
+            
