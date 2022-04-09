@@ -21,3 +21,34 @@ print("Most frequent tokens: ",fdist.most_common(20) ) # print the 20 most frequ
 word2Ind, Ind2word = get_dict(data)
 V = len(word2Ind)
 print("Size of vocabulary: ", V)
+
+# example of word to index mapping
+print("Index of the word 'king' :  ",word2Ind['king'] )
+print("Word which has index 2743:  ",Ind2word[2743] )
+
+def initialize_model(N,V, random_seed=1):
+    '''
+    Inputs: 
+        N:  dimension of hidden vector 
+        V:  dimension of vocabulary
+        random_seed: random seed for consistent results in the unit tests
+     Outputs: 
+        W1, W2, b1, b2: initialized weights and biases
+    '''
+    
+    
+    np.random.seed(random_seed)
+    # W1 has shape (N,V)
+    W1 = np.random.rand(N,V)
+    
+    # W2 has shape (V,N)
+    W2 = np.random.rand(V,N)
+    
+    # b1 has shape (N,1)
+    b1 = np.random.rand(N,1)
+    
+    # b2 has shape (V,1)
+    b2 = np.random.rand(V,1)
+    
+   
+    return W1, W2, b1, b2
