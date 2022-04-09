@@ -52,3 +52,16 @@ def initialize_model(N,V, random_seed=1):
     
    
     return W1, W2, b1, b2
+
+def softmax(z):
+    '''
+    Inputs: 
+        z: output scores from the hidden layer
+    Outputs: 
+        yhat: prediction (estimate of y)
+    '''
+    
+    # Calculate yhat (softmax)
+    yhat = (np.exp(z))/np.sum(np.exp(z),axis=0)
+    
+    return yhat
