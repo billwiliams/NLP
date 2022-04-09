@@ -89,3 +89,12 @@ def forward_prop(x, W1, W2, b1, b2):
    
 
     return z, h
+
+    # compute_cost: cross-entropy cost function
+def compute_cost(y, yhat, batch_size):
+
+    # cost function 
+    logprobs = np.multiply(np.log(yhat),y)
+    cost = - 1/batch_size * np.sum(logprobs)
+    cost = np.squeeze(cost)
+    return cost
