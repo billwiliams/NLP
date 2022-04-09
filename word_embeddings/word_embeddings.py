@@ -11,3 +11,8 @@ data = re.sub(r'[,!?;-]', '.',data)                                 #  Punktuati
 data = nltk.word_tokenize(data)                                     #  Tokenize string to words
 data = [ ch.lower() for ch in data if ch.isalpha() or ch == '.']    #  Lower case and drop non-alphabetical tokens
 print("Number of tokens:", len(data),'\n', data[:15])               #  print data sample
+
+# Compute the frequency distribution of the words in the dataset (vocabulary)
+fdist = nltk.FreqDist(word for word in data)
+print("Size of vocabulary: ",len(fdist) )
+print("Most frequent tokens: ",fdist.most_common(20) ) # print the 20 most frequent words and their freq.
