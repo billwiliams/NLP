@@ -16,3 +16,8 @@ print("Number of tokens:", len(data),'\n', data[:15])               #  print dat
 fdist = nltk.FreqDist(word for word in data)
 print("Size of vocabulary: ",len(fdist) )
 print("Most frequent tokens: ",fdist.most_common(20) ) # print the 20 most frequent words and their freq.
+
+# get_dict creates two dictionaries, converting words to indices and viceversa.
+word2Ind, Ind2word = get_dict(data)
+V = len(word2Ind)
+print("Size of vocabulary: ", V)
