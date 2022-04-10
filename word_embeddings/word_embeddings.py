@@ -98,3 +98,38 @@ def compute_cost(y, yhat, batch_size):
     cost = - 1/batch_size * np.sum(logprobs)
     cost = np.squeeze(cost)
     return cost
+
+def back_prop(x, yhat, y, h, W1, W2, b1, b2, batch_size):
+    '''
+    Inputs: 
+        x:  average one hot vector for the context 
+        yhat: prediction (estimate of y)
+        y:  target vector
+        h:  hidden vector (see eq. 1)
+        W1, W2, b1, b2:  matrices and biases  
+        batch_size: batch size 
+     Outputs: 
+        grad_W1, grad_W2, grad_b1, grad_b2:  gradients of matrices and biases   
+    '''
+    
+    # Compute l1 as W2^T (Yhat - Y)
+    # and re-use it whenever you see W2^T (Yhat - Y) used to compute a gradient
+    l1 = np.matmul(W2.T,(yhat-y))
+
+    # Apply relu to l1
+    relu_l1=np.maximum(l1,0)
+
+    # compute the gradient for W1
+    grad_W1 = (1/batch_size)*np.matmul(relu_l1,x.T)
+
+    # Compute gradient of W2
+    grad_W2 = (1/batch_size)*np.matmul((yhat-y),h.T)
+    
+    # compute gradient for b1
+    grad_b1 = np.sum((1/batch_size)*relu_l1,axis=1,keepdims=True)
+
+    # compute gradient for b2
+    grad_b2 =np.sum( (1/batch_size)*(yhat-y),axis=1,keepdims=True)
+    
+    
+    return grad_W1, grad_W2, grad_b1, grad_b2
