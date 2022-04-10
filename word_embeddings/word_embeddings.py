@@ -198,3 +198,12 @@ def gradient_descent(data, word2Ind, N, V, num_iters, alpha=0.03,
             alpha *= 0.66
             
     return W1, W2, b1, b2
+
+#Test gradient descent
+C = 2
+N = 50
+word2Ind, Ind2word = get_dict(data)
+V = len(word2Ind)
+num_iters = 150
+print("Call gradient_descent")
+W1, W2, b1, b2 = gradient_descent(data, word2Ind, N, V, num_iters)
