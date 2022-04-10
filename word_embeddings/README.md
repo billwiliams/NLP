@@ -27,3 +27,14 @@ For the following sentence:
 $$context = [I,am, because, I]$$
 $$target = happy$$
 
+
+# Training the Model
+
+### Initializing the model
+
+We initialize two matrices and two vectors. 
+- The first matrix ($W_1$) is of dimension $N \times V$, where $V$ is the number of words in your vocabulary and $N$ is the dimension of your word vector.
+- The second matrix ($W_2$) is of dimension $V \times N$. 
+- Vector $b_1$ has dimensions $N\times 1$
+- Vector $b_2$ has dimensions  $V\times 1$. 
+- $b_1$ and $b_2$ are the bias vectors of the linear layers from matrices $W_1$ and $W_2$.
