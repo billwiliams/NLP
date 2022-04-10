@@ -38,3 +38,13 @@ We initialize two matrices and two vectors.
 - Vector $b_1$ has dimensions $N\times 1$
 - Vector $b_2$ has dimensions  $V\times 1$. 
 - $b_1$ and $b_2$ are the bias vectors of the linear layers from matrices $W_1$ and $W_2$.
+
+###  Softmax
+Ww implement the softmax function as defined :  
+
+<br>
+$$ \text{softmax}(z_i) = \frac{e^{z_i} }{\sum_{i=0}^{V-1} e^{z_i} }  \tag{5} $$
+
+- Array indexing in code starts at 0.
+- $V$ is the number of words in the vocabulary (which is also the number of rows of $z$).
+- $i$ goes from 0 to |V| - 1.
