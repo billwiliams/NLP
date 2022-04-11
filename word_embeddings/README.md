@@ -48,3 +48,18 @@ $$ \text{softmax}(z_i) = \frac{e^{z_i} }{\sum_{i=0}^{V-1} e^{z_i} }  \tag{5} $$
 - Array indexing in code starts at 0.
 - $V$ is the number of words in the vocabulary (which is also the number of rows of $z$).
 - $i$ goes from 0 to |V| - 1.
+
+### Forward propagation
+
+
+Implementing the forward propagation $z$ according to equations (1) to (3). <br>
+
+\begin{align}
+ h &= W_1 \  X + b_1  \tag{1} \\
+ a &= ReLU(h)  \tag{2} \\
+ z &= W_2 \  a + b_2   \tag{3} \\
+\end{align}
+
+For that, you we use  the Rectified Linear Unit (ReLU) activation given by:
+
+$$f(h)=\max (0,h) \tag{6}$$
