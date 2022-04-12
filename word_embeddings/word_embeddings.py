@@ -207,3 +207,16 @@ V = len(word2Ind)
 num_iters = 150
 print("Call gradient_descent")
 W1, W2, b1, b2 = gradient_descent(data, word2Ind, N, V, num_iters)
+
+#visualizing word embeddings
+from matplotlib import pyplot
+%config InlineBackend.figure_format = 'svg'
+words = ['king', 'queen','lord','man', 'woman','dog','wolf',
+         'rich','happy','sad']
+
+embs = (W1.T + W2)/2.0
+ 
+# given a list of words and the embeddings, it returns a matrix with all the embeddings
+idx = [word2Ind[word] for word in words]
+X = embs[idx, :]
+print(X.shape, idx)  # X.shape:  Number of words of dimension N each 
