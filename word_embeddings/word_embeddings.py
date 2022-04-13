@@ -220,3 +220,9 @@ embs = (W1.T + W2)/2.0
 idx = [word2Ind[word] for word in words]
 X = embs[idx, :]
 print(X.shape, idx)  # X.shape:  Number of words of dimension N each 
+
+result= compute_pca(X, 2)
+pyplot.scatter(result[:, 0], result[:, 1])
+for i, word in enumerate(words):
+    pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
+pyplot.show()
