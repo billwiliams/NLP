@@ -210,7 +210,6 @@ W1, W2, b1, b2 = gradient_descent(data, word2Ind, N, V, num_iters)
 
 #visualizing word embeddings
 from matplotlib import pyplot
-%config InlineBackend.figure_format = 'svg'
 words = ['king', 'queen','lord','man', 'woman','dog','wolf',
          'rich','happy','sad']
 
