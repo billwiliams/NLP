@@ -225,3 +225,9 @@ pyplot.scatter(result[:, 0], result[:, 1])
 for i, word in enumerate(words):
     pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
 pyplot.show()
+
+result= compute_pca(X, 4)
+pyplot.scatter(result[:, 3], result[:, 1])
+for i, word in enumerate(words):
+    pyplot.annotate(word, xy=(result[i, 3], result[i, 1]))
+pyplot.show()
