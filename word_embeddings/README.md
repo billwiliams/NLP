@@ -63,3 +63,7 @@ Implementing the forward propagation $z$ according to equations (1) to (3). <br>
 For that, you we use  the Rectified Linear Unit (ReLU) activation given by:
 
 $$f(h)=\max (0,h) \tag{6}$$
+
+##  Training the Model - Backpropagation
+
+We  implement a function that computes the gradients to backpropagate the errors.
