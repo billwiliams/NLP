@@ -67,3 +67,9 @@ $$f(h)=\max (0,h) \tag{6}$$
 ##  Training the Model - Backpropagation
 
 We  implement a function that computes the gradients to backpropagate the errors.
+
+## Gradient Descent
+
+
+We implement batch gradient descent over your training set. 
+
