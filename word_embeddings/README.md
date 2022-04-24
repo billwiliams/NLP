@@ -73,3 +73,7 @@ We  implement a function that computes the gradients to backpropagate the errors
 
 We implement batch gradient descent over your training set. 
 
+## Visualizing the word vectors
+
+We visualize the word vectors trained using the function. 
+
