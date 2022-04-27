@@ -179,7 +179,7 @@ def gradient_descent(data, word2Ind, N, V, num_iters, alpha=0.03,
         # get cost
         cost = compute_cost(y, yhat, batch_size)
         if ( (iters+1) % 10 == 0):
-            print(f"fiters: {iters + 1} cost: {cost:.6f} ")
+            print('fiters: {} cost: {} '.format(iters + 1,cost))
             
         # get gradients
         grad_W1, grad_W2, grad_b1, grad_b2 = back_prop(x, yhat, y, h, W1, W2, b1, b2, batch_size)
