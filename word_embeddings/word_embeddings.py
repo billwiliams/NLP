@@ -2,7 +2,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 import numpy as np
 from collections import Counter
-from utils import sigmoid, get_batches, compute_pca, get_dict
+from utils import sigmoid, get_batches,compute_pca, get_dict
 
 import re                                                           #  Load the Regex-modul
 with open('../data/word_embeddings/shakespeare.txt') as f:
@@ -222,6 +222,7 @@ X = embs[idx, :]
 print(X.shape, idx)  # X.shape:  Number of words of dimension N each 
 
 result= compute_pca(X, 2)
+print("plot")
 pyplot.scatter(result[:, 0], result[:, 1])
 for i, word in enumerate(words):
     pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
