@@ -51,3 +51,15 @@ def process_tweet(tweet):
             tweets_clean.append(stem_word)
     
     return tweets_clean
+
+# let's not reuse variables
+# all_positive_tweets = twitter_samples.strings('positive_tweets.json')
+# all_negative_tweets = twitter_samples.strings('negative_tweets.json')
+
+def load_tweets():
+    all_positive_tweets = twitter_samples.strings('positive_tweets.json')
+    all_negative_tweets = twitter_samples.strings('negative_tweets.json')  
+    return all_positive_tweets, all_negative_tweets
+
+# Layers have weights and a foward function.
+# They create weights when layer.initialize is called and use them.
