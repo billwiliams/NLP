@@ -46,3 +46,9 @@ train_pos, train_neg, train_x, train_y, val_pos, val_neg, val_x, val_y = train_v
 
 print(f"length of train_x {len(train_x)}")
 print(f"length of val_x {len(val_x)}")
+
+print("original tweet at training position 0")
+print(train_pos[0])
+
+print("Tweet at training position 0 after processing:")
+process_tweet(train_pos[0])
