@@ -52,3 +52,23 @@ print(train_pos[0])
 
 print("Tweet at training position 0 after processing:")
 process_tweet(train_pos[0])
+
+def get_vocab(train_x):
+
+    # Include special tokens 
+    # started with pad, end of line and unk tokens
+    Vocab = {'__PAD__': 0, '__</e>__': 1, '__UNK__': 2} 
+
+    # Note that we build vocab using training data
+    for tweet in train_x: 
+        processed_tweet = process_tweet(tweet)
+        for word in processed_tweet:
+            if word not in Vocab: 
+                Vocab[word] = len(Vocab)
+    
+    return Vocab
+
+Vocab = get_vocab(train_x)
+
+print("Total words in vocab are",len(Vocab))
+display(Vocab)
