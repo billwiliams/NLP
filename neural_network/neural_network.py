@@ -41,3 +41,8 @@ def train_val_split():
 
 
     return train_pos, train_neg, train_x, train_y, val_pos, val_neg, val_x, val_y
+
+train_pos, train_neg, train_x, train_y, val_pos, val_neg, val_x, val_y = train_val_split()
+
+print(f"length of train_x {len(train_x)}")
+print(f"length of val_x {len(val_x)}")
