@@ -292,3 +292,30 @@ def data_generator(data_pos, data_neg, batch_size, loop, vocab_dict, shuffle=Fal
         
         # note we use yield and not return
         yield inputs, targets, example_weights
+
+# Create the training data generator
+
+def train_generator(batch_size, train_pos
+                    , train_neg, vocab_dict, loop=True
+                    , shuffle = False):
+    return data_generator(train_pos, train_neg, batch_size, loop, vocab_dict, shuffle)
+
+# Create the validation data generator
+def val_generator(batch_size, val_pos
+                    , val_neg, vocab_dict, loop=True
+                    , shuffle = False):
+    return data_generator(val_pos, val_neg, batch_size, loop, vocab_dict, shuffle)
+
+# Create the validation data generator
+def test_generator(batch_size, val_pos
+                    , val_neg, vocab_dict, loop=False
+                    , shuffle = False):
+    return data_generator(val_pos, val_neg, batch_size, loop, vocab_dict, shuffle)
+
+# Get a batch from the train_generator and inspect.
+inputs, targets, example_weights = next(train_generator(4, train_pos, train_neg, Vocab, shuffle=True))
+
+# this will print a list of 4 tensors padded with zeros
+print(f'Inputs: {inputs}')
+print(f'Targets: {targets}')
+print(f'Example Weights: {example_weights}')
