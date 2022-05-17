@@ -319,3 +319,16 @@ inputs, targets, example_weights = next(train_generator(4, train_pos, train_neg,
 print(f'Inputs: {inputs}')
 print(f'Targets: {targets}')
 print(f'Example Weights: {example_weights}')
+
+# Test the train_generator
+
+# Create a data generator for training data,
+# which produces batches of size 4 (for tensors and their respective targets)
+tmp_data_gen = train_generator(batch_size = 4, train_pos=train_pos, train_neg=train_neg, vocab_dict=Vocab)
+
+# Call the data generator to get one batch and its targets
+tmp_inputs, tmp_targets, tmp_example_weights = next(tmp_data_gen)
+
+print(f"The inputs shape is {tmp_inputs.shape}")
+for i,t in enumerate(tmp_inputs):
+    print(f"input tensor: {t}; target {tmp_targets[i]}; example weights {tmp_example_weights[i]}")
