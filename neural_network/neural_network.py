@@ -71,7 +71,7 @@ def get_vocab(train_x):
 Vocab = get_vocab(train_x)
 
 print("Total words in vocab are",len(Vocab))
-display(Vocab)
+
 
 def tweet_to_tensor(tweet, vocab_dict, unk_token='__UNK__', verbose=False):
     '''
@@ -84,10 +84,10 @@ def tweet_to_tensor(tweet, vocab_dict, unk_token='__UNK__', verbose=False):
         tensor_l - A python list with
         
     '''     
-  
+   
     # Process the tweet into a list of words
     # where only important words are kept (stop words removed)
-    word_l = None
+    word_l = process_tweet(tweet)
     
     if verbose:
         print("List of words from the processed tweet:")
@@ -97,9 +97,9 @@ def tweet_to_tensor(tweet, vocab_dict, unk_token='__UNK__', verbose=False):
     tensor_l = [] 
     
     # Get the unique integer ID of the __UNK__ token
-   
+     
 
-    unk_ID = None
+    unk_ID = vocab_dict[unk_token]
     
     if verbose:
         print(f"The unique integer ID for the unk_token is {unk_ID}")
@@ -110,13 +110,13 @@ def tweet_to_tensor(tweet, vocab_dict, unk_token='__UNK__', verbose=False):
         # Get the unique integer ID.
         # If the word doesn't exist in the vocab dictionary,
         # use the unique ID for __UNK__ instead.
-        word_ID = None
+        word_ID = vocab_dict.get(word,unk_ID)
     
         # Append the unique integer ID to the tensor list.
         tensor_l.append(word_ID)
    
-
     return tensor_l
+
 
 def data_generator(data_pos, data_neg, batch_size, loop, vocab_dict, shuffle=False):
     '''
@@ -198,12 +198,16 @@ def data_generator(data_pos, data_neg, batch_size, loop, vocab_dict, shuffle=Fal
             pos_index = pos_index + 1
 
 
-        
+            
+     
+
+        # Second part: Pack n_to_take negative examples
+
         # Using the same batch list, start from neg_index and increment i up to n_to_take
-        for i in range(None):
+        for i in range(n_to_take):
             
             # If the negative index goes past the negative dataset,
-            if None
+            if neg_index>=len_data_neg:
                 
                 # If loop is set to False, break once we reach the end of the dataset
                 if not loop:
@@ -211,23 +215,23 @@ def data_generator(data_pos, data_neg, batch_size, loop, vocab_dict, shuffle=Fal
                     break 
                     
                 # If user wants to keep re-using the data, reset the index
-                neg_index = None
+                neg_index = 0
                 
                 if shuffle:
                     # Shuffle the index of the negative sample
                     rnd.shuffle(neg_index_lines)
                     
             # get the tweet as neg_index
-            tweet = None
+            tweet = data_neg[neg_index_lines[neg_index]]
             
             # convert the tweet into tensors of integers representing the processed words
-            tensor = None
+            tensor = tweet_to_tensor(tweet,vocab_dict)
             
             # append the tensor to the batch list
-            None
+            batch.append(tensor)
             
             # Increment neg_index by one
-            neg_index = None
+            neg_index = neg_index+1
 
               
 
@@ -254,39 +258,39 @@ def data_generator(data_pos, data_neg, batch_size, loop, vocab_dict, shuffle=Fal
         for tensor in batch:
 
 
-
             # Get the number of positions to pad for this tensor so that it will be max_len long
-            n_pad = None
+            n_pad = max_len-len(tensor)
             
             # Generate a list of zeros, with length n_pad
-            pad_l = None
+            pad_l = np.zeros(n_pad,dtype=int).tolist()
+            
             
             # concatenate the tensor and the list of padded zeros
-            tensor_pad = None
+            tensor_pad =tensor+pad_l
             
             # append the padded tensor to the list of padded tensors
-            None
+            tensor_pad_l.append(tensor_pad)
 
         # convert the list of padded tensors to a numpy array
         # and store this as the model inputs
-        inputs = None
+        inputs = np.array(tensor_pad_l)
   
         # Generate the list of targets for the positive examples (a list of ones)
         # The length is the number of positive examples in the batch
-        target_pos = None
+        target_pos = np.ones(n_to_take,dtype=int).tolist()
         
         # Generate the list of targets for the negative examples (a list of zeros)
         # The length is the number of negative examples in the batch
-        target_neg = None
+        target_neg = np.zeros(n_to_take,dtype=int).tolist()
         
         # Concatenate the positve and negative targets
-        target_l = None
+        target_l = target_pos+target_neg
         
         # Convert the target list into a numpy array
-        targets = None
+        targets = np.array(target_l)
 
         # Example weights: Treat all examples equally importantly.
-        example_weights = None
+        example_weights = np.ones(len(targets),dtype=int)
         
 
         
