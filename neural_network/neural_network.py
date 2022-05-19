@@ -336,3 +336,20 @@ tmp_inputs, tmp_targets, tmp_example_weights = next(tmp_data_gen)
 print(f"The inputs shape is {tmp_inputs.shape}")
 for i,t in enumerate(tmp_inputs):
     print(f"input tensor: {t}; target {tmp_targets[i]}; example weights {tmp_example_weights[i]}")
+
+
+
+class Relu(Layer):
+    """Relu activation function implementation"""
+    def forward(self, x):
+        '''
+        Input: 
+            - x (a numpy array): the input
+        Output:
+            - activation (numpy array): all positive or 0 version of x
+        '''
+        
+        activation = np.maximum(0,x)
+
+        
+        return activation
