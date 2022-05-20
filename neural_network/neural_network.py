@@ -353,3 +353,41 @@ class Relu(Layer):
 
         
         return activation
+
+class Dense(Layer):
+    """
+    A dense (fully-connected) layer.
+    """
+
+    
+    def __init__(self, n_units, init_stdev=0.1):
+        
+        # Set the number of units in this layer
+        self._n_units = n_units
+        self._init_stdev = init_stdev
+
+   
+    def forward(self, x):        
+               
+        # Matrix multiply x and the weight matrix
+        
+       
+        dense = np.dot(x,self.weights)
+        
+        
+        return dense
+
+    
+    def init_weights_and_state(self, input_signature, random_key):
+        
+       
+        # The input_signature has a .shape attribute that gives the shape as a tuple
+        input_shape = (input_signature.shape[1],self._n_units)
+
+        # Generate the weight matrix from a normal distribution, 
+        # and standard deviation of 'stdev'        
+        w = self._init_stdev * trax.fastmath.random.normal(key = random_key, shape = input_shape)
+                
+       
+        self.weights = w
+        return self.weights
