@@ -495,3 +495,22 @@ print(output_dir_expand)
 
 #Train the model
 training_loop = train_model(model, train_task, [eval_task], 100, output_dir_expand)
+
+# Create a generator object
+tmp_train_generator = train_generator(16, train_pos
+                    , train_neg, Vocab, loop=True
+                    , shuffle = False)
+
+
+
+# get one batch
+tmp_batch = next(tmp_train_generator)
+
+# Position 0 has the model inputs (tweets as tensors)
+# position 1 has the targets (the actual labels)
+tmp_inputs, tmp_targets, tmp_example_weights = tmp_batch
+
+print(f"The batch is a tuple of length {len(tmp_batch)} because position 0 contains the tweets, and position 1 contains the targets.") 
+print(f"The shape of the tweet tensors is {tmp_inputs.shape} (num of examples, length of tweet tensors)")
+print(f"The shape of the labels is {tmp_targets.shape}, which is the batch size.")
+print(f"The shape of the example_weights is {tmp_example_weights.shape}, which is the same as inputs/targets size."
