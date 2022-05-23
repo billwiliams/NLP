@@ -423,3 +423,33 @@ def classifier(vocab_size=9088, embedding_dim=256, output_dim=2, mode='train'):
     
     # return the model of type
     return model
+
+tmp_model = classifier(vocab_size=len(Vocab))
+
+from trax.supervised import training
+
+def get_train_eval_tasks(train_pos, train_neg, val_pos, val_neg, vocab_dict, loop, batch_size = 16):
+    
+    rnd.seed(271)
+
+    train_task = training.TrainTask(
+        labeled_data=train_generator(batch_size, train_pos
+                    , train_neg, vocab_dict, loop
+                    , shuffle = True),
+        loss_layer=tl.CrossEntropyLoss(),
+        optimizer=trax.optimizers.Adam(0.01),
+        n_steps_per_checkpoint=10,
+    )
+
+    eval_task = training.EvalTask(
+        labeled_data=val_generator(batch_size, val_pos
+                    , val_neg, vocab_dict, loop
+                    , shuffle = True),        
+        metrics=[tl.CrossEntropyLoss(), tl.Accuracy()],
+    )
+    
+    return train_task, eval_task
+    
+
+train_task, eval_task = get_train_eval_tasks(train_pos, train_neg, val_pos, val_neg, Vocab, True, batch_size = 16)
+model = classifier()
