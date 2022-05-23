@@ -480,3 +480,18 @@ def train_model(classifier, train_task, eval_task, n_steps, output_dir):
    
     # Return the training_loop, since it has the model.
     return training_loop
+# training directory
+dir_path = './model/'
+
+try:
+    shutil.rmtree(dir_path)
+except OSError as e:
+    pass
+
+
+output_dir = './model/'
+output_dir_expand = os.path.expanduser(output_dir)
+print(output_dir_expand)
+
+#Train the model
+training_loop = train_model(model, train_task, [eval_task], 100, output_dir_expand)
