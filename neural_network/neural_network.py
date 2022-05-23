@@ -453,3 +453,30 @@ def get_train_eval_tasks(train_pos, train_neg, val_pos, val_neg, vocab_dict, loo
 
 train_task, eval_task = get_train_eval_tasks(train_pos, train_neg, val_pos, val_neg, Vocab, True, batch_size = 16)
 model = classifier()
+
+def train_model(classifier, train_task, eval_task, n_steps, output_dir):
+    '''
+    Input: 
+        classifier - the model you are building
+        train_task - Training task
+        eval_task - Evaluation task. Received as a list
+        n_steps - the evaluation steps
+        output_dir - folder to save your files
+    Output:
+        trainer -  trax trainer
+    '''
+    rnd.seed(31) # Do NOT modify this random seed. This makes the notebook easier to replicate
+    
+        
+    training_loop = training.Loop( 
+                                classifier, # The learning model
+                                train_task, # The training task
+                                eval_tasks=eval_task, # The evaluation task
+                                output_dir=output_dir, # The output directory
+                                random_seed=31 # Do not modify this random seed in order to ensure reproducibility and for grading purposes.
+    ) 
+
+    training_loop.run(n_steps = n_steps)
+   
+    # Return the training_loop, since it has the model.
+    return training_loop
