@@ -2,6 +2,7 @@ import string
 import re
 import os
 import nltk
+nltk.data.path.append('../data/')
 nltk.download('twitter_samples')
 nltk.download('stopwords')
 from nltk.tokenize import TweetTokenizer
