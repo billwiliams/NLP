@@ -613,3 +613,12 @@ def test_model(generator, model, compute_accuracy=compute_accuracy):
     
    
     return accuracy
+
+
+# testing the accuracy of your model
+model = training_loop.eval_model
+accuracy = test_model(test_generator(16, val_pos
+                    , val_neg, Vocab, loop=False
+                    , shuffle = False), model)
+
+print(f'The accuracy of your model on the validation set is {accuracy:.4f}', )
