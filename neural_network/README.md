@@ -41,3 +41,17 @@ The vocabulary will also include some special tokens
 - `</e>`: end of line
 - `__UNK__`: a token representing any word that is not in the vocabulary.
 
+**Output**
+
+Total words in vocab are 9088
+
+- {'__PAD__': 0,
+ '__</e>__': 1,
+ '__UNK__': 2,
+ 'followfriday': 3,
+ 'top': 4,
+ 'engag': 5,
+ 'member': 6,
+ 'commun': 7,
+ 'week': 8,
+ ':)': 9, }
