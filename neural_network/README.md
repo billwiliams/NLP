@@ -29,3 +29,15 @@ We introduce  the Google library `trax` that we use for building and training mo
 Import the data set.  
 - Details of process_tweet function are available in utils.py file
 
+## Building the vocabulary
+
+Now we build the vocabulary.
+- Map each word in each tweet to an integer (an "index"). 
+
+- We assign an index to everyword by iterating over your training set.
+
+The vocabulary will also include some special tokens
+- `__PAD__`: padding
+- `</e>`: end of line
+- `__UNK__`: a token representing any word that is not in the vocabulary.
+
