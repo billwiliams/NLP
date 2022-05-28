@@ -1,1 +1,31 @@
 # Sentiment with Deep Neural Networks
+we explore sentiment analysis using deep neural networks. 
+
+using  Logistic regression and Naive Bayes for sentiment analysis fails on examples like this:
+
+<center> <span style='color:blue'> <b>This movie was almost good.</b> </span> </center>
+
+The  models would have predicted a positive sentiment for that review. However, that sentence has a negative sentiment and indicates that the movie was not good. To solve those kinds of misclassifications, we use  deep neural networks to identify sentiment in text. 
+
+Objectives:
+
+- Understand how you can build/design a model using layers
+- Train a model using a training loop
+- Use a binary cross-entropy loss function
+- Compute the accuracy of DNN model
+- Predict using  own input
+
+This model follows a similar structure to the ones  previously implemented i
+- The only thing that changes is the model architecture, the inputs, and the outputs. 
+
+We introduce  the Google library `trax` that we use for building and training models.
+
+
+- Trax source code can be found on Github: [Trax](https://github.com/google/trax)
+- The Trax code also uses the JAX library: [JAX](https://jax.readthedocs.io/en/latest/index.html)
+
+##  Loading in the data
+
+Import the data set.  
+- Details of process_tweet function are available in utils.py file
+
