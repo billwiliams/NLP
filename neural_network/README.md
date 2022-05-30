@@ -55,3 +55,28 @@ Total words in vocab are 9088
  'commun': 7,
  'week': 8,
  ':)': 9, }
+
+##  Converting a tweet to a tensor
+
+We convert each tweet to a tensor (a list of unique integer IDs representing the processed tweet).
+- Note, the returned data type is a **regular Python `list()`**
+    
+- For words in the tweet that are not in the vocabulary,  we set them to the unique ID for the token `__UNK__`.
+
+##### Example
+Input a tweet:
+```CPP
+'@happypuppy, is Maria happy?'
+```
+
+The tweet_to_tensor  converts the tweet into a list of tokens (including only relevant words)
+```CPP
+['maria', 'happi']
+```
+
+Then it converts each word into its unique integer
+
+```CPP
+[2, 56]
+```
+- Notice that the word "maria" is not in the vocabulary, so it is assigned the unique integer associated with the `__UNK__` token, because it is considered "unknown."
