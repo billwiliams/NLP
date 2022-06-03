@@ -80,3 +80,28 @@ Then it converts each word into its unique integer
 [2, 56]
 ```
 - Notice that the word "maria" is not in the vocabulary, so it is assigned the unique integer associated with the `__UNK__` token, because it is considered "unknown."
+
+## Creating a batch generator
+
+Most of the time in Natural Language Processing, and AI in general  batches are used  when training our data sets. 
+- If instead of training with batches of examples, we were to train a model with one example at a time, it would take a very long time to train the model. 
+- we  build a data generator that takes in the positive/negative tweets and returns a batch of training examples. It returns the model inputs, the targets (positive or negative labels) and the weight for each target (ex: this allows us to can treat some examples as more important to get right than others, but commonly this will all be 1.0). 
+
+We include it in a for loop
+
+```CPP
+for batch_inputs, batch_targets, batch_example_weights in data_generator:
+    ...
+```
+
+We can also get a single batch like this:
+
+```CPP
+batch_inputs, batch_targets, batch_example_weights = next(data_generator)
+```
+The generator returns the next batch each time it's called. 
+- This generator returns the data in a format (tensors) that you could directly use in your model.
+- It returns a triplet: the inputs, targets, and loss weights:
+    - Inputs is a tensor that contains the batch of tweets we put into the model.
+    - Targets is the corresponding batch of labels that we train to generate.
+    - Loss weights here are just 1s with same shape as targets. 
