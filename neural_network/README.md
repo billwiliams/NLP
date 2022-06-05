@@ -105,3 +105,44 @@ The generator returns the next batch each time it's called.
     - Inputs is a tensor that contains the batch of tweets we put into the model.
     - Targets is the corresponding batch of labels that we train to generate.
     - Loss weights here are just 1s with same shape as targets. 
+
+
+# Defining classes
+
+We write your own library of layers similar to the one used in Trax and also in Keras and PyTorch. 
+
+Our framework is based on the following `Layer` class from utils.py.
+
+```CPP
+class Layer(object):
+    """ Base class for layers.
+    """
+      
+    # Constructor
+    def __init__(self):
+        # set weights to None
+        self.weights = None
+
+    # The forward propagation should be implemented
+    # by subclasses of this Layer class
+    def forward(self, x):
+        raise NotImplementedError
+
+    # This function initializes the weights
+    # based on the input signature and random key,
+    # This is implemented by subclasses of this Layer class
+    def init_weights_and_state(self, input_signature, random_key):
+        pass
+
+    # This initializes and returns the weights, do not override.
+    def init(self, input_signature, random_key):
+        self.init_weights_and_state(input_signature, random_key)
+        return self.weights
+ 
+    # __call__ allows an object of this class
+    # to be called like it's a function.
+    def __call__(self, x):
+        # When this layer object is called, 
+        # it calls its forward propagation function
+        return self.forward(x)
+```
