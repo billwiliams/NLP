@@ -178,3 +178,22 @@ need to be passed.
 setting the standard deviation of the random values to 0.1
 - The values generated have a mean of 0 and standard deviation of 1.
 - we Set the default standard deviation `stdev` to be 0.1 by multiplying the standard deviation to each of the values in the weight matrix.
+
+## Model
+
+Now we implement a classifier using neural networks.
+
+
+
+For the model implementation, we use the Trax `layers` module, imported as `tl`.
+ Trax layers are very similar to the ones implemented above,
+but in addition to trainable weights  they also have a non-trainable state.
+State is used in layers like batch normalization and for inference
+
+A look at the code of the Trax Dense layer 
+- [tl.Dense](https://github.com/google/trax/blob/master/trax/layers/core.py#L29): Trax Dense layer implementation
+
+One other important layer that we use a lot is one that allows to execute one layer after another in sequence.
+- [tl.Serial](https://github.com/google/trax/blob/master/trax/layers/combinators.py#L26): Combinator that applies layers serially.  
+    - You can pass in the layers as arguments to `Serial`, separated by commas. 
+    - For example: `tl.Serial(tl.Embeddings(...), tl.Mean(...), tl.Dense(...), tl.LogSoftmax(...))`
