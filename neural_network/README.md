@@ -206,3 +206,7 @@ Similarly to evaluate a model, Trax defines an abstraction [`trax.supervised.tra
 
 The final piece tying things together is the [`trax.supervised.training.Loop`](https://trax-ml.readthedocs.io/en/latest/trax.supervised.html#trax.supervised.training.Loop) abstraction that is a very simple and flexible way to put everything together and train the model, all the while evaluating it and saving checkpoints.
 Using `Loop`  saves a lot of code compared to always writing the training loop by hand.
+
+## Making a prediction
+
+Now that we have trained a model, we can access it as `training_loop.model` object. We  use `training_loop.eval_model` 
