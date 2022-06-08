@@ -210,3 +210,16 @@ Using `Loop`  saves a lot of code compared to always writing the training loop b
 ## Making a prediction
 
 Now that we have trained a model, we can access it as `training_loop.model` object. We  use `training_loop.eval_model` 
+
+#  Evaluation  
+
+
+## Computing the accuracy on a batch
+
+We write a function that evaluates the  model on the validation set and returns the accuracy. 
+- `preds` contains the predictions.
+    - Its dimensions are `(batch_size, output_dim)`.  `output_dim` is two in this case.  Column 0 contains the probability that the tweet belongs to class 0 (negative sentiment). Column 1 contains probability that it belongs to class 1 (positive sentiment).
+    - If the probability in column 1 is greater than the probability in column 0, then interpret this as the model's prediction that the example has label 1 (positive sentiment).  
+    - Otherwise, if the probabilities are equal or the probability in column 0 is higher, the model's prediction is 0 (negative sentiment).
+- `y` contains the actual labels.
+- `y_weights` contains the weights to give to predictions.
