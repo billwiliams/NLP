@@ -223,3 +223,20 @@ We write a function that evaluates the  model on the validation set and returns 
     - Otherwise, if the probabilities are equal or the probability in column 0 is higher, the model's prediction is 0 (negative sentiment).
 - `y` contains the actual labels.
 - `y_weights` contains the weights to give to predictions.
+
+## Testing the  model on Validation Data
+
+We  test the model's prediction accuracy on validation data. 
+
+The program  takes in a data generator and the model. 
+- The generator allows  to get batches of data. We can use it with a `for` loop:
+
+```
+for batch in iterator: 
+   # do something with that batch
+```
+
+`batch` has dimensions `(batch size, 2)`. 
+- Column 0 corresponds to the tweet as a tensor.
+- Column 1 corresponds to its target (actual label, positive or negative sentiment).
+- We feed the tweet into model and it will return the predictions for the batch. 
