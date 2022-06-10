@@ -240,3 +240,9 @@ for batch in iterator:
 - Column 0 corresponds to the tweet as a tensor.
 - Column 1 corresponds to its target (actual label, positive or negative sentiment).
 - We feed the tweet into model and it will return the predictions for the batch. 
+
+
+### On Deep Nets
+
+Deep nets allow us to understand and capture dependencies that u would have not been able to capture with a simple linear regression, or logistic regression. 
+- It also allows yusu to better use pre-trained embeddings for classification and tends to generalize better.
