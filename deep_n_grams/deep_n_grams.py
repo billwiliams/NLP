@@ -23,3 +23,13 @@ with open(os.path.join(dirname, filename)) as files:
         if pure_line:
             # append it to the list
             lines.append(pure_line)
+
+
+# go through each line
+for i, line in enumerate(lines):
+    # convert to all lowercase
+    lines[i] = line.lower()
+
+print(f"Number of lines: {n_lines}")
+print(f"Sample line at position 0 {lines[0]}")
+print(f"Sample line at position 999 {lines[999]}")
