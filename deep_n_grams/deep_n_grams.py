@@ -33,3 +33,9 @@ for i, line in enumerate(lines):
 print(f"Number of lines: {n_lines}")
 print(f"Sample line at position 0 {lines[0]}")
 print(f"Sample line at position 999 {lines[999]}")
+
+eval_lines = lines[-1000:] # Create a holdout validation set
+lines = lines[:-1000] # Leave the rest for training
+
+print(f"Number of lines for training: {len(lines)}")
+print(f"Number of lines for validation: {len(eval_lines)}")
