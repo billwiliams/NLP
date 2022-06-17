@@ -24,3 +24,12 @@ T
 To predict the next character:
 - We Use the softmax output and identify the word with the highest probability.
 - The word with the highest probability is the prediction for the next word.
+
+### 1.3 Batch generator 
+
+Most of the time in Natural Language Processing, and AI in general we use batches when training our data sets. We  build a data generator that takes in a text and returns a batch of text lines (lines are sentences).
+- The generator converts text lines (sentences) into numpy arrays of integers padded by zeros so that all arrays have the same length, which is the length of the longest sentence in the entire data set.
+
+
+
+The generator returns the data in a format that we can  directly use in the model when computing the feed-forward of the algorithm. This iterator returns a batch of lines and per token mask. The batch is a tuple of three parts: inputs, targets, mask. The inputs and targets are identical. The second column will be used to evaluate  predictions. Mask is 1 for non-padding tokens.
