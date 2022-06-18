@@ -167,4 +167,10 @@ def data_generator(batch_size, max_length, data_lines, line_to_tensor=line_to_te
             
             # reset the current batch to an empty list
             cur_batch = []
+
+
+import itertools
+
+infinite_data_generator = itertools.cycle(
+    data_generator(batch_size=2, max_length=10, data_lines=tmp_lines))
             
