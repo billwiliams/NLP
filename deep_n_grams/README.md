@@ -33,3 +33,13 @@ Most of the time in Natural Language Processing, and AI in general we use batche
 
 
 The generator returns the data in a format that we can  directly use in the model when computing the feed-forward of the algorithm. This iterator returns a batch of lines and per token mask. The batch is a tuple of three parts: inputs, targets, mask. The inputs and targets are identical. The second column will be used to evaluate  predictions. Mask is 1 for non-padding tokens.
+
+###  Repeating Batch generator 
+
+The way the iterator is currently defined, it will keep providing batches forever.
+
+
+
+Usually we want to cycle over the dataset multiple times during training (i.e. train for multiple *epochs*).
+
+For small datasets we can use [`itertools.cycle`](https://docs.python.org/3.8/library/itertools.html#itertools.cycle) to achieve this easily.
