@@ -261,4 +261,35 @@ training_loop = train_model(GRULM(), data_generator, lines=lines, eval_lines=eva
 
 
 
-            
+def test_model(preds, target):
+    """Function to test the model.
+
+    Args:
+        preds (jax.interpreters.xla.DeviceArray): Predictions of a list of batches of tensors corresponding to lines of text.
+        target (jax.interpreters.xla.DeviceArray): Actual list of batches of tensors corresponding to lines of text.
+
+    Returns:
+        float: log_perplexity of the model.
+    """
+
+
+    log_p = np.sum(tl.one_hot(target,preds.shape[-1]) * preds, axis= -1) # HINT: tl.one_hot() should replace one of the Nones
+
+    non_pad = 1.0 - np.equal(target, 0)          # You should check if the target equals 0
+    log_p = log_p * non_pad                             # Get rid of the padding    
+    
+    log_ppx = np.sum(log_p, axis=1) / np.sum(non_pad, axis=1) # Remember to set the axis properly when summing up
+    log_ppx = np.mean(log_ppx) # Compute the mean of the previous expression
+    
+    
+  
+    
+    return -log_ppx   
+
+# Testing 
+model = GRULM()
+model.init_from_file('model.pkl.gz')
+batch = next(data_generator(batch_size, max_length, lines, shuffle=False))
+preds = model(batch[0])
+log_ppx = test_model(preds, batch[1])
+print('The log perplexity and perplexity of your model are respectively', log_ppx, np.exp(log_ppx))
