@@ -248,6 +248,16 @@ def train_model(model, data_generator, lines, eval_lines, batch_size=32, max_len
     # We return this because it contains a handle to the model, which has the weights etc.
     return training_loop
 
+# Train the model 1 step and keep the `trax.supervised.training.Loop` object.
+output_dir = './model/'
+
+try:
+    shutil.rmtree(output_dir)
+except OSError as e:
+    pass
+
+training_loop = train_model(GRULM(), data_generator, lines=lines, eval_lines=eval_lines)
+
 
 
 
