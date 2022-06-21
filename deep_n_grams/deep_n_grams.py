@@ -318,3 +318,7 @@ def predict(num_chars, prefix):
     return "".join(result)
 
 print(predict(32, ""))
+
+print(predict(32, ""))
+print(predict(32, ""))
+print(predict(32, ""))
