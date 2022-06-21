@@ -293,3 +293,28 @@ batch = next(data_generator(batch_size, max_length, lines, shuffle=False))
 preds = model(batch[0])
 log_ppx = test_model(preds, batch[1])
 print('The log perplexity and perplexity of your model are respectively', log_ppx, np.exp(log_ppx))
+
+
+def gumbel_sample(log_probs, temperature=1.0):
+    """Gumbel sampling from a categorical distribution."""
+    u = numpy.random.uniform(low=1e-6, high=1.0 - 1e-6, size=log_probs.shape)
+    g = -np.log(-np.log(u))
+    return np.argmax(log_probs + g * temperature, axis=-1)
+
+def predict(num_chars, prefix):
+    inp = [ord(c) for c in prefix]
+    result = [c for c in prefix]
+    max_len = len(prefix) + num_chars
+    for _ in range(num_chars):
+        cur_inp = np.array(inp + [0] * (max_len - len(inp)))
+        outp = model(cur_inp[None, :])  # Add batch dim.
+        next_char = gumbel_sample(outp[0, len(inp)])
+        inp += [int(next_char)]
+       
+        if inp[-1] == 1:
+            break  # EOS
+        result.append(chr(int(next_char)))
+    
+    return "".join(result)
+
+print(predict(32, ""))
