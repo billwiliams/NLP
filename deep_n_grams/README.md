@@ -79,4 +79,12 @@ ___
 - `tl.LogSoftmax`: Log of the output probabilities. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.core.LogSoftmax) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/core.py#L644)
     - Here, you don't need to set any parameters for `LogSoftMax()`.
 ___
+#  Training
 
+We define the cost function, the optimizer, and decide whether we will be training it on a `gpu` or `cpu`. We also have to feed in a built model. we use the `TrainTask` and `EvalTask` abstractions 
+
+To train a model on a task, Trax defines an abstraction `trax.supervised.training.TrainTask` which packages the train data, loss and optimizer (among other things) together into an object.
+
+Similarly to evaluate a model, Trax defines an abstraction `trax.supervised.training.EvalTask` which packages the eval data and metrics (among other things) into another object.
+
+The final piece tying things together is the `trax.supervised.training.Loop` abstraction that is a very simple and flexible way to put everything together and train the model, all the while evaluating it and saving checkpoints.
