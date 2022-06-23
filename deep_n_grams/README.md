@@ -43,3 +43,40 @@ The way the iterator is currently defined, it will keep providing batches foreve
 Usually we want to cycle over the dataset multiple times during training (i.e. train for multiple *epochs*).
 
 For small datasets we can use [`itertools.cycle`](https://docs.python.org/3.8/library/itertools.html#itertools.cycle) to achieve this easily.
+
+#  Defining the GRU model
+
+Now that we have the input and output tensors, we will go ahead and initialize the model. we will be implementing the `GRULM`, gated recurrent unit model. To implement this model, we will be using google's `trax` package. 
+We will use the following packages when constructing the model: 
+
+
+- `tl.Serial`: Combinator that applies layers serially (by function composition). [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.combinators.Serial) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/combinators.py#L26)
+    - we can pass in the layers as arguments to `Serial`, separated by commas. 
+    - For example: `tl.Serial(tl.Embeddings(...), tl.Mean(...), tl.Dense(...), tl.LogSoftmax(...))`
+
+___
+
+- `tl.ShiftRight`: Allows the model to go right in the feed forward. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.attention.ShiftRight) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/attention.py#L560)
+    - `ShiftRight(n_shifts=1, mode='train')` layer to shift the tensor to the right n_shift times
+    
+___
+
+- `tl.Embedding`: Initializes the embedding. In this case it is the size of the vocabulary by the dimension of the model. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.core.Embedding) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/core.py#L130) 
+    - `tl.Embedding(vocab_size, d_feature)`.
+    - `vocab_size` is the number of unique words in the given vocabulary.
+    - `d_feature` is the number of elements in the word embedding (some choices for a word embedding size range from 150 to 300, for example).
+___
+
+- `tl.GRU`: `Trax` GRU layer. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.rnn.GRU) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/rnn.py#L154)
+    - `GRU(n_units)` Builds a traditional GRU of n_cells with dense internal transformations.
+    - `GRU` paper: https://arxiv.org/abs/1412.3555
+___
+
+- `tl.Dense`: A dense layer. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.core.Dense) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/core.py#L34)
+    - `tl.Dense(n_units)`: The parameter `n_units` is the number of units chosen for this dense layer.
+___
+
+- `tl.LogSoftmax`: Log of the output probabilities. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.core.LogSoftmax) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/core.py#L644)
+    - Here, you don't need to set any parameters for `LogSoftMax()`.
+___
+
