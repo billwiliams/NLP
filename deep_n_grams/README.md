@@ -94,3 +94,26 @@ An `epoch` is traditionally defined as one pass through the dataset.
 Since the dataset is divided in `batches` we need several `steps` (gradient evaluations) in order to complete an `epoch`. So, one `epoch` corresponds to the number of examples in a `batch` times the number of `steps`. In short, in each `epoch` we go over all the dataset. 
 
 The `max_length` variable defines the maximum length of lines to be used in training the data, lines longer than that length are discarded. 
+
+
+###  Training the model
+
+We write a function that takes in the model and trains it. To train the model we have to decide how many times we want to iterate over the entire data set. 
+
+ Here is a list of things we do:
+
+- We Create a `trax.supervised.trainer.TrainTask` object, this encapsulates the aspects of the dataset and the problem at hand:
+    - labeled_data = the labeled data that we want to *train* on.
+    - loss_fn = [tl.CrossEntropyLoss()](https://trax-ml.readthedocs.io/en/latest/trax.layers.html?highlight=CrossEntropyLoss#trax.layers.metrics.CrossEntropyLoss)
+    - optimizer = [trax.optimizers.Adam()](https://trax-ml.readthedocs.io/en/latest/trax.optimizers.html?highlight=Adam#trax.optimizers.adam.Adam) with learning rate = 0.0005
+
+- We Create a `trax.supervised.trainer.EvalTask` object, this encapsulates aspects of evaluating the model:
+    - labeled_data = the labeled data that we want to *evaluate* on.
+    - metrics = [tl.CrossEntropyLoss()](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.metrics.CrossEntropyLoss) and [tl.Accuracy()](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.metrics.Accuracy)
+    - How frequently we want to evaluate and checkpoint the model.
+
+- We Create a `trax.supervised.trainer.Loop` object, this encapsulates the following:
+    - The previously created `TrainTask` and `EvalTask` objects.
+    - the training model = [GRULM](#ex03)
+    - optionally the evaluation model, if different from the training model. NOTE: in presence of Dropout etc we usually want the evaluation model to behave slightly differently than the training model.
+
