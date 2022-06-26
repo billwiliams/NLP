@@ -88,3 +88,9 @@ To train a model on a task, Trax defines an abstraction `trax.supervised.trainin
 Similarly to evaluate a model, Trax defines an abstraction `trax.supervised.training.EvalTask` which packages the eval data and metrics (among other things) into another object.
 
 The final piece tying things together is the `trax.supervised.training.Loop` abstraction that is a very simple and flexible way to put everything together and train the model, all the while evaluating it and saving checkpoints.
+
+An `epoch` is traditionally defined as one pass through the dataset.
+
+Since the dataset is divided in `batches` we need several `steps` (gradient evaluations) in order to complete an `epoch`. So, one `epoch` corresponds to the number of examples in a `batch` times the number of `steps`. In short, in each `epoch` we go over all the dataset. 
+
+The `max_length` variable defines the maximum length of lines to be used in training the data, lines longer than that length are discarded. 
