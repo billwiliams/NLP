@@ -131,3 +131,14 @@ As an implementation hack, weou would usually take the log of that formula (to e
 $$\log P(W) = {\log\left(\sqrt[N]{\prod_{i=1}^{N} \frac{1}{P(w_i| w_1,...,w_{n-1})}}\right)}$$$$ = \log\left(\left(\prod_{i=1}^{N} \frac{1}{P(w_i| w_1,...,w_{n-1})}\right)^{\frac{1}{N}}\right)$$
 $$ = \log\left(\left({\prod_{i=1}^{N}{P(w_i| w_1,...,w_{n-1})}}\right)^{-\frac{1}{N}}\right)$$$$ = -\frac{1}{N}{\log\left({\prod_{i=1}^{N}{P(w_i| w_1,...,w_{n-1})}}\right)} $$$$ = -\frac{1}{N}{{\sum_{i=1}^{N}{\log P(w_i| w_1,...,w_{n-1})}}} $$
 
+# Generating the language with the model
+
+To use our own language model to generate new sentences  we need to make draws from a Gumble distribution.
+
+The Gumbel Probability Density Function (PDF) is defined as: 
+
+$$ f(z) = {1\over{\beta}}e^{(-z+e^{(-z)})} $$
+
+where: $$ z = {(x - \mu)\over{\beta}}$$
+
+The maximum value, which is what we choose as the prediction in the last step of a Recursive Neural Network `RNN` we are using for text generation, in a sample of a random variable following an exponential distribution approaches the Gumbel distribution when the sample increases asymptotically. For that reason, the Gumbel distribution is used to sample from a categorical distribution.
