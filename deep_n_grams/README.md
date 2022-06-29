@@ -142,3 +142,7 @@ $$ f(z) = {1\over{\beta}}e^{(-z+e^{(-z)})} $$
 where: $$ z = {(x - \mu)\over{\beta}}$$
 
 The maximum value, which is what we choose as the prediction in the last step of a Recursive Neural Network `RNN` we are using for text generation, in a sample of a random variable following an exponential distribution approaches the Gumbel distribution when the sample increases asymptotically. For that reason, the Gumbel distribution is used to sample from a categorical distribution.
+
+###  <span style="color:blue"> On statistical methods </span>
+
+Using statistical method  will not give  results that are as good. The model will not be able to encode information seen previously in the data set and as a result, the perplexity will increase.  Furthermore, statistical ngram models take up too much space and memory. As a result, it will be inefficient and too slow. Conversely, with deepnets, We can get a better perplexity
