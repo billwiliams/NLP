@@ -1,6 +1,6 @@
 # Deep N-grams
 
-Eexploring Recurrent Neural Networks `RNN` by implementing a system to predict next set of characters using previous characters.
+Exploring Recurrent Neural Networks `RNN` by implementing a system to predict next set of characters using previous characters.
 - We will be using the fundamentals of google's [trax](https://github.com/google/trax) package to implement the  deeplearning model. 
 
 outcomes:-
@@ -18,9 +18,6 @@ The task will be to predict the next set of characters using the previous charac
  - Many natural language tasks rely on using embeddings for predictions. 
 - The model will convert each character to its embedding, run the embeddings through a Gated Recurrent Unit `GRU`, and run it through a linear layer to predict the next set of characters.
 
-
-T
-
 To predict the next character:
 - We Use the softmax output and identify the word with the highest probability.
 - The word with the highest probability is the prediction for the next word.
@@ -30,15 +27,11 @@ To predict the next character:
 Most of the time in Natural Language Processing, and AI in general we use batches when training our data sets. We  build a data generator that takes in a text and returns a batch of text lines (lines are sentences).
 - The generator converts text lines (sentences) into numpy arrays of integers padded by zeros so that all arrays have the same length, which is the length of the longest sentence in the entire data set.
 
-
-
 The generator returns the data in a format that we can  directly use in the model when computing the feed-forward of the algorithm. This iterator returns a batch of lines and per token mask. The batch is a tuple of three parts: inputs, targets, mask. The inputs and targets are identical. The second column will be used to evaluate  predictions. Mask is 1 for non-padding tokens.
 
 ###  Repeating Batch generator 
 
 The way the iterator is currently defined, it will keep providing batches forever.
-
-
 
 Usually we want to cycle over the dataset multiple times during training (i.e. train for multiple *epochs*).
 
@@ -55,7 +48,6 @@ We will use the following packages when constructing the model:
     - For example: `tl.Serial(tl.Embeddings(...), tl.Mean(...), tl.Dense(...), tl.LogSoftmax(...))`
 
 ___
-
 - `tl.ShiftRight`: Allows the model to go right in the feed forward. [docs](https://trax-ml.readthedocs.io/en/latest/trax.layers.html#trax.layers.attention.ShiftRight) / [source code](https://github.com/google/trax/blob/e65d51fe584b10c0fa0fccadc1e70b6330aac67e/trax/layers/attention.py#L560)
     - `ShiftRight(n_shifts=1, mode='train')` layer to shift the tensor to the right n_shift times
     
