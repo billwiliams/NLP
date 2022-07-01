@@ -7,8 +7,9 @@ import numpy
 import random as rnd
 from trax import fastmath
 from trax import layers as tl
+import itertools
 
-dirname = 'data/'
+dirname = '../data/deep_n_grams/'
 filename = 'shakespeare_data.txt'
 lines = [] # storing all the lines in a variable. 
 
@@ -30,6 +31,7 @@ for i, line in enumerate(lines):
     # convert to all lowercase
     lines[i] = line.lower()
 
+n_lines = len(lines)
 print(f"Number of lines: {n_lines}")
 print(f"Sample line at position 0 {lines[0]}")
 print(f"Sample line at position 999 {lines[999]}")
