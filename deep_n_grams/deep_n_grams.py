@@ -290,7 +290,7 @@ def test_model(preds, target):
 
 # Testing 
 model = GRULM()
-model.init_from_file('model.pkl.gz')
+model.init_from_file('./model/model.pkl.gz')
 batch = next(data_generator(batch_size, max_length, lines, shuffle=False))
 preds = model(batch[0])
 log_ppx = test_model(preds, batch[1])
