@@ -288,6 +288,8 @@ def test_model(preds, target):
     
     return -log_ppx   
 
+batch_size = 32
+max_length = 64
 # Testing 
 model = GRULM()
 model.init_from_file('./model/model.pkl.gz')
