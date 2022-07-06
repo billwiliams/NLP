@@ -16,3 +16,5 @@ Github doesn't render the formulas using mathjax hence not visible in github
 
 #### 4. [autocomplete](https://github.com/billwiliams/NLP/tree/main/autocomplete) Implementation of  an Auto-complete system that predicts next word 
 
+#### 4. [Deep N-GRAM Model](https://github.com/billwiliams/NLP/tree/main/deep_n_grams) Exploring Recurrent Neural Networks RNN by implementing a system to predict next set of characters using previous characters. 
+
