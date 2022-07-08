@@ -18,3 +18,8 @@ print('SENTENCE:', train_sents)
 print('SENTENCE LABEL:', train_labels)
 print('ORIGINAL DATA:\n', data.head(5))
 del(data, train_sents, train_labels)
+
+vocab, tag_map = get_vocab('data/large/words.txt', 'data/large/tags.txt')
+t_sentences, t_labels, t_size = get_params(vocab, tag_map, 'data/large/train/sentences.txt', 'data/large/train/labels.txt')
+v_sentences, v_labels, v_size = get_params(vocab, tag_map, 'data/large/val/sentences.txt', 'data/large/val/labels.txt')
+test_sentences, test_labels, test_size = get_params(vocab, tag_map, 'data/large/test/sentences.txt', 'data/large/test/labels.txt')
