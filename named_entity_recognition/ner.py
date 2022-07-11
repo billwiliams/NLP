@@ -129,3 +129,24 @@ def NER(tags, vocab_size=35181, d_model=50):
       ) 
 
     return model
+
+  
+# initializing your model
+model = NER(tag_map)
+# display your model
+print(model)
+
+# Setting random seed for reproducibility and testing
+rnd.seed(33)
+
+batch_size = 64
+
+# Create training data, mask pad id=35180 for training.
+train_generator = trax.data.inputs.add_loss_weights(
+    data_generator(batch_size, t_sentences, t_labels, vocab['<PAD>'], True),
+    id_to_mask=vocab['<PAD>'])
+
+# Create validation data, mask pad id=35180 for training.
+eval_generator = trax.data.inputs.add_loss_weights(
+    data_generator(batch_size, v_sentences, v_labels, vocab['<PAD>'], True),
+    id_to_mask=vocab['<PAD>'])
