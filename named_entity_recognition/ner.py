@@ -186,3 +186,10 @@ def train_model(NER, train_generator, eval_generator, train_steps=1, output_dir=
     training_loop.run(n_steps = train_steps)
 
     return training_loop
+
+
+train_steps = 100           
+!rm -f 'model/model.pkl.gz'  # Remove old model.pkl if it exists
+
+# Train the model
+training_loop = train_model(NER(tag_map), train_generator, eval_generator, train_steps)
