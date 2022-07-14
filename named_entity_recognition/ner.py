@@ -193,3 +193,29 @@ train_steps = 100
 
 # Train the model
 training_loop = train_model(NER(tag_map), train_generator, eval_generator, train_steps)
+
+# create the evaluation inputs
+x, y = next(data_generator(len(test_sentences), test_sentences, test_labels, vocab['<PAD>']))
+print("input shapes", x.shape, y.shape)
+
+def evaluate_prediction(pred, labels, pad):
+    """
+    Inputs:
+        pred: prediction array with shape 
+            (num examples, max sentence length in batch, num of classes)
+        labels: array of size (batch_size, seq_len)
+        pad: integer representing pad character
+    Outputs:
+        accuracy: float
+    """
+
+    outputs = np.argmax(pred,axis=-1)
+    print("outputs shape:", outputs.shape)
+
+
+    mask = outputs==pad
+    print("mask shape:", mask.shape, "mask[0][20:30]:", mask[0][20:30])
+
+    accuracy = np.sum(outputs==labels)/np.sum(labels!=pad)
+    
+    return accuracy
