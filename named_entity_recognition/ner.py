@@ -219,3 +219,6 @@ def evaluate_prediction(pred, labels, pad):
     accuracy = np.sum(outputs==labels)/np.sum(labels!=pad)
     
     return accuracy
+
+accuracy = evaluate_prediction(model(x), y, vocab['<PAD>'])
+print("accuracy: ", accuracy)
