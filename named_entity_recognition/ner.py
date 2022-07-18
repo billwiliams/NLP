@@ -238,3 +238,11 @@ def predict(sentence, model, vocab, tag_map):
         pred_label = labels[idx]
         pred.append(pred_label)
     return pred
+
+# New york times news:
+sentence = "Peter Navarro, the White House director of trade and manufacturing policy of U.S, said in an interview on Sunday morning that the White House was working to prepare for the possibility of a second wave of the coronavirus in the fall, though he said it wouldn’t necessarily come"
+s = [vocab[token] if token in vocab else vocab['UNK'] for token in sentence.split(' ')]
+predictions = predict(sentence, model, vocab, tag_map)
+for x,y in zip(sentence.split(' '), predictions):
+    if y != 'O':
+        print(x,y)
