@@ -21,3 +21,14 @@ We use a dataset from Kaggle original data consists of four columns: the sentenc
 A generator is a function that behaves like an iterator. It returns the next item in a pre-defined sequence. 
 
 In many AI applications it is  useful to have a data generator. 
+
+# Building the model
+
+We implement the model that will be able to determining the tags of sentences 
+
+Concretely, the  inputs will be sentences represented as tensors that are fed to a model with:
+
+* An Embedding layer,
+* A LSTM layer
+* A Dense layer
+* A log softmax layer
