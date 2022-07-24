@@ -32,3 +32,7 @@ Concretely, the  inputs will be sentences represented as tensors that are fed to
 * A LSTM layer
 * A Dense layer
 * A log softmax layer
+
+# Training the Model 
+
+We  need to create the data generators for training and validation data. It is important to mask padding in the loss weights of the data, which can be done using the `id_to_mask` argument of [`trax.data.inputs.add_loss_weights`](https://trax-ml.readthedocs.io/en/latest/trax.data.html?highlight=add_loss_weights#trax.data.inputs.add_loss_weights).
