@@ -36,3 +36,8 @@ Concretely, the  inputs will be sentences represented as tensors that are fed to
 # Training the Model 
 
 We  need to create the data generators for training and validation data. It is important to mask padding in the loss weights of the data, which can be done using the `id_to_mask` argument of [`trax.data.inputs.add_loss_weights`](https://trax-ml.readthedocs.io/en/latest/trax.data.html?highlight=add_loss_weights#trax.data.inputs.add_loss_weights).
+
+# Computing Accuracy
+
+We evaluate the model  in the test set. Previously, we have seen the accuracy on the training set and the validation (noted as eval) set. We now evaluate on  test set. To get a good evaluation, we need to create a mask to avoid counting the padding tokens when computing the accuracy. 
+
