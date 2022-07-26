@@ -41,3 +41,21 @@ We  need to create the data generators for training and validation data. It is i
 
 We evaluate the model  in the test set. Previously, we have seen the accuracy on the training set and the validation (noted as eval) set. We now evaluate on  test set. To get a good evaluation, we need to create a mask to avoid counting the padding tokens when computing the accuracy. 
 
+# Testing with on own sentence
+
+we can test on our own sentence like below sample
+- "Peter Navarro, the White House director of trade and manufacturing policy of U.S, said in an interview on Sunday morning that the White House was working to prepare for the possibility of a second wave of the coronavirus in the fall, though he said it wouldn’t necessarily come"
+
+Sample output
+
+- Peter B-per
+- Navarro, I-per
+- White B-org
+- House I-org
+- Sunday B-tim
+- morning I-tim
+- White B-org
+- House I-org
+- coronavirus B-tim
+- fall, B-tim
+
