@@ -59,3 +59,18 @@ Sample output
 - coronavirus B-tim
 - fall, B-tim
 
+**Expected Results**
+
+```
+Peter B-per
+Navarro, I-per
+White B-org
+House I-org
+Sunday B-tim
+morning I-tim
+White B-org
+House I-org
+coronavirus B-tim
+fall, B-tim
+```
+
