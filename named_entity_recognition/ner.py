@@ -50,8 +50,8 @@ def get_params(vocab, tag_map, sentences_file, labels_file):
 rnd.seed(33)
 
 data = pd.read_csv("../data/ner/ner_dataset.csv", encoding = "ISO-8859-1") 
-train_sents = open('../data/ner/small/sentences.txt', 'r').readline()
-train_labels = open('../data/ner/small/labels.txt', 'r').readline()
+train_sents = open('../data/ner/sentences.txt', 'r').readline()
+train_labels = open('../data/ner/labels.txt', 'r').readline()
 print('SENTENCE:', train_sents)
 print('SENTENCE LABEL:', train_labels)
 print('ORIGINAL DATA:\n', data.head(5))
