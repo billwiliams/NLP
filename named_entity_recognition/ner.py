@@ -58,9 +58,9 @@ print('ORIGINAL DATA:\n', data.head(5))
 del(data, train_sents, train_labels)
 
 vocab, tag_map = get_vocab('../data/ner/words.txt', '../data/ner/tags.txt')
-t_sentences, t_labels, t_size = get_params(vocab, tag_map, '../data/ner/large/train/sentences.txt', '../data/ner/large/train/labels.txt')
-v_sentences, v_labels, v_size = get_params(vocab, tag_map, '../data/ner/large/val/sentences.txt', '../data/ner/large/val/labels.txt')
-test_sentences, test_labels, test_size = get_params(vocab, tag_map, '../data/ner/large/test/sentences.txt', '../data/ner/large/test/labels.txt')
+t_sentences, t_labels, t_size = get_params(vocab, tag_map, '../data/ner/large/large/train/sentences.txt', '../data/ner/large/large/train/labels.txt')
+v_sentences, v_labels, v_size = get_params(vocab, tag_map, '../data/ner/large/large/val/sentences.txt', '../data/ner/large/large/val/labels.txt')
+test_sentences, test_labels, test_size = get_params(vocab, tag_map, '../data/ner/large/large/test/sentences.txt', '../data/ner/large/large/test/labels.txt')
 
 def data_generator(batch_size, x, y, pad, shuffle=False, verbose=False):
     '''
