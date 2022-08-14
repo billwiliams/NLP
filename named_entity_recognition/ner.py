@@ -57,7 +57,7 @@ print('SENTENCE LABEL:', train_labels)
 print('ORIGINAL DATA:\n', data.head(5))
 del(data, train_sents, train_labels)
 
-vocab, tag_map = get_vocab('../data/ner/words.txt', '../data/ner/tags.txt')
+vocab, tag_map = get_vocab('../data/ner/large/large/words.txt', '../data/ner/large/large/tags.txt')
 t_sentences, t_labels, t_size = get_params(vocab, tag_map, '../data/ner/large/large/train/sentences.txt', '../data/ner/large/large/train/labels.txt')
 v_sentences, v_labels, v_size = get_params(vocab, tag_map, '../data/ner/large/large/val/sentences.txt', '../data/ner/large/large/val/labels.txt')
 test_sentences, test_labels, test_size = get_params(vocab, tag_map, '../data/ner/large/large/test/sentences.txt', '../data/ner/large/large/test/labels.txt')
