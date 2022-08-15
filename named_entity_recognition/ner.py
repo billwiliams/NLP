@@ -258,6 +258,13 @@ def evaluate_prediction(pred, labels, pad):
     
     return accuracy
 
+
+# loading in a pretrained model..
+model = NER(tag_map)
+model.init(trax.shapes.ShapeDtype((1, 1), dtype=np.int32))
+
+# Load the pretrained model
+model.init_from_file('model.pkl.gz', weights_only=True)
 accuracy = evaluate_prediction(model(x), y, vocab['<PAD>'])
 print("accuracy: ", accuracy)
 
