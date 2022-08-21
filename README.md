@@ -17,4 +17,4 @@ Github doesn't render the formulas using mathjax hence not visible in github
 #### 4. [autocomplete](https://github.com/billwiliams/NLP/tree/main/autocomplete) Implementation of  an Auto-complete system that predicts next word 
 
 #### 4. [Deep N-GRAM Model](https://github.com/billwiliams/NLP/tree/main/deep_n_grams) Exploring Recurrent Neural Networks RNN by implementing a system to predict next set of characters using previous characters. 
-
+#### 4. [Nmed Entity Recognition](https://github.com/billwiliams/NLP/tree/main/named_entity_recognition) Implementatiopn of model for information extraction that locates and classifies named entities in a text. The named entities could be organizations, persons, locations, times, etc. 
