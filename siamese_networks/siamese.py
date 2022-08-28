@@ -19,3 +19,10 @@ data = pd.read_csv("data/questions.csv")
 N=len(data)
 print('Number of question pairs: ', N)
 data.head()
+
+N_train = 300000
+N_test  = 10*1024
+data_train = data[:N_train]
+data_test  = data[N_train:N_train+N_test]
+print("Train set:", len(data_train), "Test set:", len(data_test))
+del(data) # remove to free memory
