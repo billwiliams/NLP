@@ -26,3 +26,9 @@ data_train = data[:N_train]
 data_test  = data[N_train:N_train+N_test]
 print("Train set:", len(data_train), "Test set:", len(data_test))
 del(data) # remove to free memory
+Q1_train_words = np.array(data_train['question1'][td_index])
+Q2_train_words = np.array(data_train['question2'][td_index])
+
+Q1_test_words = np.array(data_test['question1'])
+Q2_test_words = np.array(data_test['question2'])
+y_test  = np.array(data_test['is_duplicate'])
