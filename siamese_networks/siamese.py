@@ -32,3 +32,34 @@ Q2_train_words = np.array(data_train['question2'][td_index])
 Q1_test_words = np.array(data_test['question1'])
 Q2_test_words = np.array(data_test['question2'])
 y_test  = np.array(data_test['is_duplicate'])
+print('TRAINING QUESTIONS:\n')
+print('Question 1: ', Q1_train_words[0])
+print('Question 2: ', Q2_train_words[0], '\n')
+print('Question 1: ', Q1_train_words[5])
+print('Question 2: ', Q2_train_words[5], '\n')
+
+print('TESTING QUESTIONS:\n')
+print('Question 1: ', Q1_test_words[0])
+print('Question 2: ', Q2_test_words[0], '\n')
+print('is_duplicate =', y_test[0], '\n')
+
+#create arrays
+Q1_train = np.empty_like(Q1_train_words)
+Q2_train = np.empty_like(Q2_train_words)
+
+Q1_test = np.empty_like(Q1_test_words)
+Q2_test = np.empty_like(Q2_test_words)
+
+from collections import defaultdict
+
+vocab = defaultdict(lambda: 0)
+vocab['<PAD>'] = 1
+
+for idx in range(len(Q1_train_words)):
+        Q1_train[idx] = nltk.word_tokenize(Q1_train_words[idx])
+            Q2_train[idx] = nltk.word_tokenize(Q2_train_words[idx])
+                q = Q1_train[idx] + Q2_train[idx]
+                    for word in q:
+                                if word not in vocab:
+                                                vocab[word] = len(vocab) + 1
+                                                print('The length of the vocabulary is: ', len(vocab))
