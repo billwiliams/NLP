@@ -63,3 +63,11 @@ for idx in range(len(Q1_train_words)):
                                 if word not in vocab:
                                                 vocab[word] = len(vocab) + 1
                                                 print('The length of the vocabulary is: ', len(vocab))
+
+print(vocab['<PAD>'])
+print(vocab['Astrology'])
+print(vocab['Astronomy'])  #not in vocabulary, returns 0
+
+for idx in range(len(Q1_test_words)): 
+        Q1_test[idx] = nltk.word_tokenize(Q1_test_words[idx])
+            Q2_test[idx] = nltk.word_tokenize(Q2_test_words[idx])
