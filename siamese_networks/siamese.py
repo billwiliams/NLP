@@ -71,3 +71,15 @@ print(vocab['Astronomy'])  #not in vocabulary, returns 0
 for idx in range(len(Q1_test_words)): 
         Q1_test[idx] = nltk.word_tokenize(Q1_test_words[idx])
             Q2_test[idx] = nltk.word_tokenize(Q2_test_words[idx])
+
+print('Train set has reduced to: ', len(Q1_train) ) 
+print('Test set length: ', len(Q1_test) ) 
+# Converting questions to array of integers
+for i in range(len(Q1_train)):
+        Q1_train[i] = [vocab[word] for word in Q1_train[i]]
+            Q2_train[i] = [vocab[word] for word in Q2_train[i]]
+
+                    
+                    for i in range(len(Q1_test)):
+                            Q1_test[i] = [vocab[word] for word in Q1_test[i]]
+                                Q2_test[i] = [vocab[word] for word in Q2_test[i]]
