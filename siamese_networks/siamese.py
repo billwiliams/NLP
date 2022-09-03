@@ -83,3 +83,11 @@ for i in range(len(Q1_train)):
                     for i in range(len(Q1_test)):
                             Q1_test[i] = [vocab[word] for word in Q1_test[i]]
                                 Q2_test[i] = [vocab[word] for word in Q2_test[i]]
+
+# Splitting the data
+cut_off = int(len(Q1_train)*.8)
+train_Q1, train_Q2 = Q1_train[:cut_off], Q2_train[:cut_off]
+val_Q1, val_Q2 = Q1_train[cut_off: ], Q2_train[cut_off:]
+print('Number of duplicate questions: ', len(Q1_train))
+print("The length of the training set is:  ", len(train_Q1))
+print("The length of the validation set is: ", len(val_Q1))
