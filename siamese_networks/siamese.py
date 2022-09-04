@@ -91,3 +91,11 @@ val_Q1, val_Q2 = Q1_train[cut_off: ], Q2_train[cut_off:]
 print('Number of duplicate questions: ', len(Q1_train))
 print("The length of the training set is:  ", len(train_Q1))
 print("The length of the validation set is: ", len(val_Q1))
+
+
+# create data generator
+
+batch_size = 2
+res1, res2 = next(data_generator(train_Q1, train_Q2, batch_size))
+print("First questions  : ",'\n', res1, '\n')
+print("Second questions : ",'\n', res2)
