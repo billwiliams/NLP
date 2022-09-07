@@ -167,3 +167,8 @@ batch_size = 2
 res1, res2 = next(data_generator(train_Q1, train_Q2, batch_size))
 print("First questions  : ",'\n', res1, '\n')
 print("Second questions : ",'\n', res2)
+# Model
+
+# check your model
+model = Siamese()
+print(model)
