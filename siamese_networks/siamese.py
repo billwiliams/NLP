@@ -167,6 +167,11 @@ batch_size = 2
 res1, res2 = next(data_generator(train_Q1, train_Q2, batch_size))
 print("First questions  : ",'\n', res1, '\n')
 print("Second questions : ",'\n', res2)
+from functools import partial
+def TripletLoss(margin=0.25):
+        triplet_loss_fn = partial(TripletLossFn, margin=margin)
+            return tl.Fn('TripletLoss', triplet_loss_fn)
+
 # Model
 
 # check your model
