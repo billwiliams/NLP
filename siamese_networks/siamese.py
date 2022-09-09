@@ -177,3 +177,9 @@ def TripletLoss(margin=0.25):
 # check your model
 model = Siamese()
 print(model)
+
+batch_size = 256
+train_generator = data_generator(train_Q1, train_Q2, batch_size, vocab['<PAD>'])
+val_generator = data_generator(val_Q1, val_Q2, batch_size, vocab['<PAD>'])
+print('train_Q1.shape ', train_Q1.shape)
+print('val_Q1.shape   ', val_Q1.shape)
