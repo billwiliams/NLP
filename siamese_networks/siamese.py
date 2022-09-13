@@ -214,3 +214,7 @@ train_generator = data_generator(train_Q1, train_Q2, batch_size, vocab['<PAD>'])
 val_generator = data_generator(val_Q1, val_Q2, batch_size, vocab['<PAD>'])
 print('train_Q1.shape ', train_Q1.shape)
 print('val_Q1.shape   ', val_Q1.shape)
+
+train_steps = 5
+training_loop = train_model(Siamese, TripletLoss, train_generator, val_generator)
+training_loop.run(train_steps)
