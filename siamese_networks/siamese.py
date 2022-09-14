@@ -218,3 +218,7 @@ print('val_Q1.shape   ', val_Q1.shape)
 train_steps = 5
 training_loop = train_model(Siamese, TripletLoss, train_generator, val_generator)
 training_loop.run(train_steps)
+
+# Loading in the saved model
+model = Siamese()
+model.init_from_file('model.pkl.gz')
