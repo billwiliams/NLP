@@ -222,3 +222,6 @@ training_loop.run(train_steps)
 # Loading in the saved model
 model = Siamese()
 model.init_from_file('model.pkl.gz')
+
+accuracy = classify(Q1_test,Q2_test, y_test, 0.7, model, vocab, batch_size = 512) 
+print("Accuracy", accuracy)
