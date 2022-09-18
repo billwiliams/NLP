@@ -225,3 +225,7 @@ model.init_from_file('model.pkl.gz')
 
 accuracy = classify(Q1_test,Q2_test, y_test, 0.7, model, vocab, batch_size = 512) 
 print("Accuracy", accuracy)
+question1 = "When will I see you?"
+question2 = "When can I see you again?"
+# 1 means it is duplicated, 0 otherwise
+predict(question1 , question2, 0.7, model, vocab, verbose = True)
