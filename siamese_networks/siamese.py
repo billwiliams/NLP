@@ -229,3 +229,8 @@ question1 = "When will I see you?"
 question2 = "When can I see you again?"
 # 1 means it is duplicated, 0 otherwise
 predict(question1 , question2, 0.7, model, vocab, verbose = True)
+
+question1 = "Do they enjoy eating the dessert?"
+question2 = "Do they like hiking in the desert?"
+# 1 means it is duplicated, 0 otherwise
+predict(question1 , question2, 0.7, model, vocab, verbose=True)
