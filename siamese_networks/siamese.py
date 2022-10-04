@@ -318,7 +318,7 @@ def predict(question1, question2, threshold, model, vocab, data_generator=data_g
         print("d   = ", d)
         print("res = ", res)
 
-    return res                                                                                                                                                                                                                                                                           return res
+    return res                                                                                                                                                                                                                                                                           
 # 1 means it is duplicated, 0 otherwise
 predict(question1 , question2, 0.7, model, vocab, verbose = True)
 
