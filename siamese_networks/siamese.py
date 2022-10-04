@@ -219,58 +219,48 @@ train_steps = 5
 training_loop = train_model(Siamese, TripletLoss, train_generator, val_generator)
 training_loop.run(train_steps)
 
-def predict(question1, question2, threshold, model, vocab, data_generator=data_generator, verbose=False):
-    """Function for predicting if two questions are duplicates.
+def classify(test_Q1, test_Q2, y, threshold, model, vocab, data_generator=data_generator, batch_size=64):
+    """Function to test the accuracy of the model.
 
     Args:
-        question1 (str): First question.
-        question2 (str): Second question.
+        test_Q1 (numpy.ndarray): Array of Q1 questions.
+        test_Q2 (numpy.ndarray): Array of Q2 questions.
+        y (numpy.ndarray): Array of actual target.
         threshold (float): Desired threshold.
         model (trax.layers.combinators.Parallel): The Siamese model.
         vocab (collections.defaultdict): The vocabulary used.
         data_generator (function): Data generator function. Defaults to data_generator.
-        verbose (bool, optional): If the results should be printed out. Defaults to False.
+        batch_size (int, optional): Size of the batches. Defaults to 64.
 
     Returns:
-        bool: True if the questions are duplicates, False otherwise.
-    """
-  
-    # use `nltk` word tokenize function to tokenize
-    q1 = nltk.word_tokenize(question1)  # tokenize
-    q2 = nltk.word_tokenize(question2)  # tokenize
-    Q1, Q2 = [], [] # @KEEPTHIS
-    for word in q1:  # encode q1
-        # increment by checking the 'word' index in `vocab`
-        Q1 += [vocab[word]]
-        # GRADING COMMENT: Also valid to use
-        # Q1.extend([vocab[word]])
-    for word in q2:  # encode q2
-        # increment by checking the 'word' index in `vocab`
-        Q2 +=  [vocab[word]]
-        # GRADING COMMENT: Also valid to use
-        # Q2.extend([vocab[word]])
-    
-    # GRADING COMMENT: Q1 and Q2 need to be nested inside another list
-    # Call the data generator (built in Ex 01) using next()
-    # pass [Q1] & [Q2] as Q1 & Q2 arguments of the data generator. Set batch size as 1
-    # Hint: use `vocab['<PAD>']` for the `pad` argument of the data generator
-    Q1, Q2 = next(data_generator([Q1], [Q2], 1, pad=vocab['<PAD>'], shuffle=False))
-    # Call the model
-    v1, v2 = model((Q1,Q2))
-    # take dot product to compute cos similarity of each pair of entries, v1, v2
-    # don't forget to transpose the second argument
-    d = fastnp.dot(v1,v2.T)
-    # is d greater than the threshold?
-    res = d> threshold
+        float: Accuracy of the model.
+    """    
     
     
-    
-    if(verbose):
-        print("Q1  = ", Q1, "\nQ2  = ", Q2)
-        print("d   = ", d)
-        print("res = ", res)
+    accuracy = 0
+    for i in range(0, len(test_Q1), batch_size):
+        # Call the data generator (built in Ex 01) with shuffle= None
+        # use batch size chuncks of questions as Q1 & Q2 arguments of the data generator. e.g x[i:i + batch_size]
+        # Hint: use `vocab['<PAD>']` for the `pad` argument of the data generator
+        q1, q2 = next(data_generator(test_Q1[i:i+batch_size], test_Q2[i:i+batch_size], batch_size, pad=vocab['<PAD>'], shuffle=False))
+        # use batch size chuncks of actual output targets (same syntax as example above)
+        y_test = y[i:i+batch_size]
+        # Call the model    
+        v1, v2 = model((q1,q2))
 
-    return res
+        for j in range(batch_size):
+            # take dot product to compute cos similarity of each pair of entries, v1[j], v2[j]
+            # don't forget to transpose the second argument
+            d = fastnp.dot(v1[j],v2[j].T)
+            # is d greater than the threshold?
+            res = d>threshold
+            # increment accurancy if y_test is equal `res`
+            accuracy +=  (y_test[j]==res)
+    # compute accuracy using accuracy and total length of test questions
+    accuracy = accuracy/len(y)
+    
+    
+    return accuracy
 accuracy = classify(Q1_test,Q2_test, y_test, 0.7, model, vocab, batch_size = 512) 
 print("Accuracy", accuracy)
 question1 = "When will I see you?"
@@ -294,7 +284,7 @@ def predict(question1, question2, threshold, model, vocab, data_generator=data_g
     Returns:
         bool: True if the questions are duplicates, False otherwise.
     """
-    ### START CODE HERE (Replace instances of 'None' with your code) ###
+    
     # use `nltk` word tokenize function to tokenize
     q1 = nltk.word_tokenize(question1)  # tokenize
     q2 = nltk.word_tokenize(question2)  # tokenize
@@ -322,8 +312,6 @@ def predict(question1, question2, threshold, model, vocab, data_generator=data_g
     d = fastnp.dot(v1,v2.T)
     # is d greater than the threshold?
     res = d> threshold
-    
-    ### END CODE HERE ###
     
     if(verbose):
         print("Q1  = ", Q1, "\nQ2  = ", Q2)
