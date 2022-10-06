@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import random as rnd
 
-import w4_unittest
 
 nltk.download('punkt')
 
