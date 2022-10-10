@@ -14,7 +14,7 @@ nltk.download('punkt')
 # set random seeds
 rnd.seed(34)
 
-data = pd.read_csv("data/questions.csv")
+data = pd.read_csv("../data/siamese/questions.csv")
 N=len(data)
 print('Number of question pairs: ', N)
 data.head()
