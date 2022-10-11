@@ -25,6 +25,13 @@ data_train = data[:N_train]
 data_test  = data[N_train:N_train+N_test]
 print("Train set:", len(data_train), "Test set:", len(data_test))
 del(data) # remove to free memory
+
+td_index = (data_train['is_duplicate'] == 1).to_numpy()
+td_index = [i for i, x in enumerate(td_index) if x] 
+print('number of duplicate questions: ', len(td_index))
+print('indexes of first ten duplicate questions:', td_index[:10])
+
+
 Q1_train_words = np.array(data_train['question1'][td_index])
 Q2_train_words = np.array(data_train['question2'][td_index])
 
