@@ -68,7 +68,7 @@ for idx in range(len(Q1_train_words)):
     for word in q:
         if word not in vocab:
             vocab[word] = len(vocab) + 1
-            print('The length of the vocabulary is: ', len(vocab))
+print('The length of the vocabulary is: ', len(vocab))
 
 print(vocab['<PAD>'])
 print(vocab['Astrology'])
