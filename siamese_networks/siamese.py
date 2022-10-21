@@ -210,7 +210,46 @@ def Siamese(vocab_size=41699, d_model=128, mode='train'):
 
 # check  model
 
-# Model 
+# Model
+
+def train_model(Siamese, TripletLoss
+                , train_generator, val_generator, output_dir='model/'):
+    """Training the Siamese Model
+
+    Args:
+        Siamese (function): Function that returns the Siamese model.
+        TripletLoss (function): Function that defines the TripletLoss loss function.
+        lr_schedule (function): Trax multifactor schedule function.
+        train_generator (generator, optional): Training generator. Defaults to train_generator.
+        val_generator (generator, optional): Validation generator. Defaults to val_generator.
+        output_dir (str, optional): Path to save model to. Defaults to 'model/'.
+
+    Returns:
+        trax.supervised.training.Loop: Training loop for the model.
+    """
+    output_dir = os.path.expanduser(output_dir)
+
+
+    train_task = training.TrainTask( 
+        labeled_data=train_generator,      # Use generator (train)
+        loss_layer=TripletLoss(),        # Use triplet loss. Don't forget to instantiate this object
+        optimizer=trax.optimizers.Adam(0.01),         # Don't forget to add the learning rate parameter
+        lr_schedule=trax.lr.warmup_and_rsqrt_decay(400, 0.01) # Use Trax multifactor schedule function
+    )
+
+    eval_task = training.EvalTask(
+        labeled_data=val_generator,      # Use generator (val)
+        metrics=[TripletLoss()],        # Use triplet loss. Don't forget to instantiate this object
+    )
+    
+
+    training_loop = training.Loop(Siamese(),
+                                  train_task,
+                                  eval_tasks=[eval_task],
+                                  output_dir=output_dir)
+
+    return training_loop
+#Train  Model
 
 model = Siamese()
 print(model)
