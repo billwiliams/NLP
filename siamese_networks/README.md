@@ -22,4 +22,20 @@ TESTING QUESTIONS:
 Question 1:  How do I prepare for interviews for cse?
 Question 2:  What is the best way to prepare for cse? 
 
-is_duplicate = 0   
+is_duplicate = 0 
+
+### Encoding questions
+
+first question in the train set:
+
+Astrology: I am a Capricorn Sun Cap moon and cap rising...what does that say about me? 
+
+encoded version:
+[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21] 
+
+first question in the test set:
+
+How do I prepare for interviews for cse? 
+
+encoded version:
+[32, 38, 4, 107, 65, 1015, 65, 11509, 21]  
