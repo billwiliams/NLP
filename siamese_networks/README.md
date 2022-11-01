@@ -38,4 +38,11 @@ first question in the test set:
 How do I prepare for interviews for cse? 
 
 encoded version:
-[32, 38, 4, 107, 65, 1015, 65, 11509, 21]  
+[32, 38, 4, 107, 65, 1015, 65, 11509, 21] 
+
+###  Defining the Siamese model
+
+#### Understanding Siamese Network
+
+A Siamese network is a neural network which uses the same weights while working in tandem on two different input vectors to compute comparable output vectors.
+ 
