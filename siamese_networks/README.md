@@ -44,5 +44,6 @@ encoded version:
 
 #### Understanding Siamese Network
 
-A Siamese network is a neural network which uses the same weights while working in tandem on two different input vectors to compute comparable output vectors.
+A Siamese network is a neural network which uses the same weights while working in tandem on two different input vectors to compute comparable output vectors
+A question embedding, is run  through an LSTM layer, normalized $v_1$ and $v_2$, and finally using a triplet loss we get the corresponding cosine similarity for each pair of questions.  The triplet loss makes use of a baseline (anchor) input that is compared to a positive (truthy) input and a negative (falsy) input. The distance from the baseline (anchor) input to the positive (truthy) input is minimized, and the distance from the baseline (anchor) input to the negative (falsy) input is maximized.
  
