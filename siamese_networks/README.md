@@ -46,4 +46,14 @@ encoded version:
 
 A Siamese network is a neural network which uses the same weights while working in tandem on two different input vectors to compute comparable output vectors
 A question embedding, is run  through an LSTM layer, normalized $v_1$ and $v_2$, and finally using a triplet loss we get the corresponding cosine similarity for each pair of questions.  The triplet loss makes use of a baseline (anchor) input that is compared to a positive (truthy) input and a negative (falsy) input. The distance from the baseline (anchor) input to the positive (truthy) input is minimized, and the distance from the baseline (anchor) input to the negative (falsy) input is maximized.
+
+### Triplet loss 
+
+The `TripletLoss`.<br> The loss is composed of two terms. One term utilizes the mean of all the non duplicates, the second utilizes the *closest negative*. Our loss expression is then:
  
+\begin{align}
+ \mathcal{Loss_{1}(A,P,N)} &=\max \left( -cos(A,P)  + mean_{neg} +\alpha, 0\right) \\
+ \mathcal{Loss_{2}(A,P,N)} &=\max \left( -cos(A,P)  + closest_{neg} +\alpha, 0\right) \\
+\mathcal{Loss(A,P,N)} &= mean(Loss_1 + Loss_2) \\
+\end{align}
+
