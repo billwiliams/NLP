@@ -57,3 +57,7 @@ The `TripletLoss`.<br> The loss is composed of two terms. One term utilizes the 
 \mathcal{Loss(A,P,N)} &= mean(Loss_1 + Loss_2) \\
 \end{align}
 
+### 4.2 Classify
+To determine the accuracy of the model, we will utilize the test set that was configured earlier. While in training we used only positive examples, the test data, Q1_test, Q2_test and y_test, is setup as pairs of questions, some of which are duplicates some are not. 
+This routine will run all the test question pairs through the model, compute the cosine simlarity of each pair, threshold it and compare the result to  y_test - the correct response from the data set. The results are accumulated to produce an accuracy.
+
