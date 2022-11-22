@@ -87,5 +87,5 @@ This routine will run all the test question pairs through the model, compute the
 
 Siamese networks are important and useful. Many times there are several questions that are already asked in quora, or other platforms and you can use Siamese networks to avoid question duplicates. 
 
- 
+Siamese networks are capable of catching complicated structures. 
 
